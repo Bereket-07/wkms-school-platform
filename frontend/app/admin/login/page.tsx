@@ -9,7 +9,8 @@ export default function AdminLogin() {
 
     const handleLogin = () => {
         // Redirect to Backend Google Auth Endpoint
-        window.location.href = 'http://localhost:8000/api/v1/auth/login';
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+        window.location.href = `${apiUrl}/auth/login`;
     };
 
     return (
