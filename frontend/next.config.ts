@@ -29,8 +29,8 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: '/static/uploads/:path*',
-        destination: 'http://localhost:8000/static/uploads/:path*',
+        source: '/static/:path*',
+        destination: `${process.env.INTERNAL_BACKEND_URL || 'http://localhost:8000'}/static/:path*`,
       },
     ]
   },
