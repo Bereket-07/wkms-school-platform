@@ -52,9 +52,11 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || isOpen
-                ? "bg-white/90 backdrop-blur-md shadow-sm py-4"
-                : "bg-transparent py-6"
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isOpen
+                    ? "bg-white py-4" // Solid white when open
+                    : scrolled
+                        ? "bg-white/90 backdrop-blur-md shadow-sm py-4"
+                        : "bg-transparent py-6"
                 }`}
         >
             <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
