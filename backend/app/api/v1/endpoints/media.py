@@ -60,9 +60,12 @@ def delete_media(
     return {"status": "success", "id": id}
 
 from fastapi import UploadFile, File
-import shutil
+import aiofiles
 import os
 import uuid
+import logging
+
+logger = logging.getLogger(__name__)
 
 @router.post("/upload")
 async def upload_file(
@@ -73,15 +76,24 @@ async def upload_file(
     Upload a file and return its URL.
     Stores in 'static/uploads'.
     """
-    UPLOAD_DIR = "static/uploads"
-    os.makedirs(UPLOAD_DIR, exist_ok=True)
+    logger.info(f"Received upload request for file: {file.filename}")
     
-    # Generate unique filename
-    ext = file.filename.split('.')[-1]
-    filename = f"{uuid.uuid4()}.{ext}"
-    file_path = os.path.join(UPLOAD_DIR, filename)
-    
-    with open(file_path, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+    try:
+        UPLOAD_DIR = "/app/static/uploads" # Use absolute path inside container
+        os.makedirs(UPLOAD_DIR, exist_ok=True)
         
-    return {"url": f"/static/uploads/{filename}"}
+        # Generate unique filename
+        ext = file.filename.split('.')[-1]
+        filename = f"{uuid.uuid4()}.{ext}"
+        file_path = os.path.join(UPLOAD_DIR, filename)
+        
+        async with aiofiles.open(file_path, 'wb') as out_file:
+            content = await file.read()  # async read
+            await out_file.write(content)  # async write
+            
+        logger.info(f"File saved successfully to: {file_path}")
+        return {"url": f"/static/uploads/{filename}"}
+        
+    except Exception as e:
+        logger.error(f"Error saving file: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Could not save file: {str(e)}")
