@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # Database Service
+  db:
+    image: postgres:15-alpine
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    networks:
+      - app_network
+
+  # Backend Service (FastAPI)
+  backend:
+    build: ./backend
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_SERVER=db
+    volumes:
+      - media_data:/app/static
+    networks:
+      - app_network
+    # Expose for debugging if needed, but mainly frontend talks to it via network
+    # ports:
+    #   - "8000:8000"
+
+  # Frontend Service (Next.js)
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    env_file:
+      - .env
+    environment:
+      # URL for server-side rendering (internal docker network)
+      - NEXT_PUBLIC_API_URL=http://backend:8000/api/v1
+    networks:
+      - app_network
+
+volumes:
+  postgres_data:
+  media_data:
+
+networks:
+  app_network:
+    driver: bridge

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "b9c55ff6-13ad-4863-afd5-dd69c2ad704b",
+    "amount": 50.0,
+    "currency": "USD",
+    "status": "SUCCESS",
+    "gateway": "STRIPE"
+  },
+  {
+    "id": "fa57d49c-8944-4fb9-afeb-273c4c117a04",
+    "amount": 500.0,
+    "currency": "ETB",
+    "status": "SUCCESS",
+    "gateway": "CHAPA"
+  },
+  {
+    "id": "b20ed140-1541-4e14-8411-80db506cf575",
+    "amount": 500.0,
+    "currency": "ETB",
+    "status": "SUCCESS",
+    "gateway": "CHAPA"
+  },
+  {
+    "id": "393c4d7c-db2e-45c0-b7c5-fd88b73639cb",
+    "amount": 234.0,
+    "currency": "ETB",
+    "status": "SUCCESS",
+    "gateway": "CHAPA"
+  },
+  {
+    "id": "54631ea8-bfbd-4dc8-b457-be9233834697",
+    "amount": 1000.0,
+    "currency": "ETB",
+    "status": "SUCCESS",
+    "gateway": "CHAPA"
+  }
+]
