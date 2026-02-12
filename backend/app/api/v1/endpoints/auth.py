@@ -87,5 +87,5 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
     )
     
     # Redirect to Frontend with Token
-    frontend_url = "http://localhost:3000/auth/callback"
+    frontend_url = f"{settings.FRONTEND_URL}/auth/callback"
     return RedirectResponse(f"{frontend_url}?token={token}")
