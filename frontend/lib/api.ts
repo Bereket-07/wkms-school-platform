@@ -153,15 +153,45 @@ export const bulkUpdateSiteContent = async (updates: Record<string, string>) => 
 // For now, let's assume we implement a generic upload endpoint in media or site-content.
 // Since we promised the user upload capability, we need a real upload endpoint.
 // Let's add it to api.ts expecting it exists at /media/upload (we need to build this!)
+// File Upload
 export const uploadFile = async (file: File): Promise<{ url: string }> => {
     const formData = new FormData();
     formData.append('file', file);
-    const response = await api.post('/media/upload', formData, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-        },
-    });
-    return response.data;
+
+    // Get Base URL directly to debug
+    let baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+
+    // Ensure baseUrl doesn't end with a slash
+    if (baseUrl.endsWith('/')) {
+        baseUrl = baseUrl.slice(0, -1);
+    }
+
+    // Ensure baseUrl includes /api/v1 if not present (heuristic)
+    if (!baseUrl.includes('/api/v1')) {
+        console.warn('Base URL might be missing /api/v1 prefix:', baseUrl);
+        // We can append it if we are sure, but let's just log for now to debug.
+    }
+
+    const uploadUrl = `${baseUrl}/media/upload`;
+    console.log('Attempting upload to:', uploadUrl);
+
+    try {
+        const response = await api.post('/media/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        return response.data;
+    } catch (error: any) {
+        console.error('Upload failed:', error);
+        if (error.response) {
+            console.error('Error Status:', error.response.status);
+            console.error('Error Data:', error.response.data);
+            console.error('Requested URL:', error.config?.url);
+            console.error('Base URL used by Axios:', error.config?.baseURL);
+        }
+        throw error;
+    }
 };
 
 // Contact
