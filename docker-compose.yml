@@ -32,14 +32,14 @@ services:
       - app_network
     # Expose for Caddy Reverse Proxy
     ports:
-      - "8000:8000"
+      - "8005:8000"
 
   # Frontend Service (Next.js)
   frontend:
     build: ./frontend
     restart: always
     ports:
-      - "3000:3000"
+      - "3005:3000"
     depends_on:
       - backend
     env_file:
