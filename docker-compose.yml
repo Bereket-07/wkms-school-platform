@@ -30,9 +30,9 @@ services:
       - media_data:/app/static
     networks:
       - app_network
-    # Expose for debugging if needed, but mainly frontend talks to it via network
-    # ports:
-    #   - "8000:8000"
+    # Expose for Caddy Reverse Proxy
+    ports:
+      - "8000:8000"
 
   # Frontend Service (Next.js)
   frontend:
