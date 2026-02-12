@@ -60,10 +60,13 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Google authentication failed: No email provided.")
 
     # 3. Verify Whitelist
-    if email not in settings.AUTHORIZED_EMAILS:
+    print(f"DEBUG AUTH: Received email from Google: '{email}'")
+    print(f"DEBUG AUTH: Authorized emails list: {settings.AUTHORIZED_EMAILS}")
+
+    if email.lower() not in [e.lower() for e in settings.AUTHORIZED_EMAILS]:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, 
-            detail="Access Denied: This email is not authorized for the Admin Panel."
+            detail=f"Access Denied: '{email}' is not authorized. Allowed: {len(settings.AUTHORIZED_EMAILS)} users."
         )
 
     # 4. Create or Update User in DB
