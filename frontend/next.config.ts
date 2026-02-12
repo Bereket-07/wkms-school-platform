@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: '/static/:path*',
-        destination: `${process.env.INTERNAL_BACKEND_URL || 'http://localhost:8000'}/static/:path*`,
+        destination: `${process.env.INTERNAL_BACKEND_URL || (process.env.NODE_ENV === 'production' ? 'http://backend:8000' : 'http://localhost:8000')}/static/:path*`,
       },
     ]
   },
