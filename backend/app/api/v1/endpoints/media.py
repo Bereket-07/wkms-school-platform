@@ -59,6 +59,13 @@ def delete_media(
         
     return {"status": "success", "id": id}
 
+@router.get("/test")
+def test_media_router():
+    """
+    Test endpoint to verify media router is mounted.
+    """
+    return {"message": "Media router is working!"}
+
 from fastapi import UploadFile, File
 import aiofiles
 import os
