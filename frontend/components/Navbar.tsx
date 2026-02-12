@@ -19,10 +19,26 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Prevent body scroll when menu is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
+
     // Close mobile menu on route change
     useEffect(() => {
         setIsOpen(false);
     }, [pathname]);
+
+    const handleLinkClick = () => {
+        setIsOpen(false);
+    };
 
     // Don't render Navbar on admin pages
     if (pathname?.startsWith('/admin')) return null;
@@ -36,14 +52,14 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || isOpen
                 ? "bg-white/90 backdrop-blur-md shadow-sm py-4"
                 : "bg-transparent py-6"
                 }`}
         >
             <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-3 group">
+                <Link href="/" className="flex items-center gap-3 group" onClick={handleLinkClick}>
                     <div className="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                         W
                     </div>
@@ -81,11 +97,11 @@ export default function Navbar() {
                 {/* Mobile Menu Button */}
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="md:hidden p-2 text-slate-600 focus:outline-none"
+                    className="md:hidden p-2 text-slate-600 focus:outline-none z-50 relative"
                     aria-label="Toggle menu"
                 >
                     {isOpen ? (
-                        <X className={`w-6 h-6 ${scrolled ? 'text-slate-900' : 'text-slate-900'}`} />
+                        <X className="w-6 h-6 text-slate-900" />
                     ) : (
                         <Menu className={`w-6 h-6 ${scrolled ? 'text-slate-900' : 'text-slate-900'}`} />
                     )}
@@ -100,6 +116,7 @@ export default function Navbar() {
                         <Link
                             key={link.name}
                             href={link.href}
+                            onClick={handleLinkClick}
                             className="text-2xl font-medium text-slate-800 hover:text-emerald-600 transition-colors"
                         >
                             {link.name}
@@ -107,6 +124,7 @@ export default function Navbar() {
                     ))}
                     <Link
                         href="/donate"
+                        onClick={handleLinkClick}
                         className="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl hover:bg-emerald-700 transition-all flex items-center gap-2"
                     >
                         Donate Now <Heart className="w-5 h-5 fill-current" />
