@@ -45,8 +45,8 @@ services:
     env_file:
       - .env
     environment:
-      # URL for server-side rendering (internal docker network)
-      - NEXT_PUBLIC_API_URL=http://backend:8000/api/v1
+      # URL for API (Client & Server)
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
     networks:
       - app_network
 
