@@ -40,9 +40,28 @@ def bulk_update_site_content(
             item = crud_content.update(db, db_obj=item, obj_in=SiteContentUpdate(content=value))
             updated_items.append(item)
         else:
-             # If it doesn't exist, we can't update it blindly without knowing the section.
-             # Ideally, we should seed content first. 
-             pass 
+             # If it doesn't exist, dynamically create it based on key heuristics
+             section = "GLOBAL"
+             if key.startswith("social_") or key.startswith("logo_"):
+                 section = "BRANDING"
+             elif "hero" in key:
+                 section = "HERO"
+             elif "about" in key:
+                 section = "ABOUT"
+
+             content_type = "TEXT"
+             if key.startswith("logo_") or key.endswith("_image") or "video" in key:
+                 content_type = "IMAGE" if "video" not in key else "VIDEO"
+
+             new_item_data = SiteContentCreate(
+                 section=section,
+                 key=key,
+                 content=value,
+                 content_type=content_type,
+                 label=key.replace("_", " ").title()
+             )
+             item = crud_content.create(db, obj_in=new_item_data)
+             updated_items.append(item)
     return updated_items
 
 @router.post("/initialize", response_model=Dict[str, int])

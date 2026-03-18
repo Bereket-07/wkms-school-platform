@@ -14,8 +14,9 @@ const config: Config = {
         soil: { 800: '#881337' },
       },
       fontFamily: {
-        sans: ['var(--font-outfit)', 'sans-serif'],
+        sans: ['var(--font-montserrat)', 'sans-serif'],
         serif: ['var(--font-merriweather)', 'serif'],
+        lato: ['var(--font-montserrat)', 'sans-serif'],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

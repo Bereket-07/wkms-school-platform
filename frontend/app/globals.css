@@ -2,6 +2,11 @@
 @import "tailwindcss";
 
 @theme {
+  --color-brand-dark: #005960;
+  --color-brand-light: #e6f4f1;
+  --color-brand-red: #F4191F;
+  --color-brand-orange: #FF9900;
+
   --color-emerald-600: #059669;
   --color-emerald-800: #065F46;
   --color-emerald-900: #064E3B;
@@ -12,14 +17,14 @@
 
   --color-soil-800: #881337;
 
-  --font-sans: 'General Sans', var(--font-outfit), sans-serif;
+  --font-sans: 'General Sans', var(--font-montserrat), sans-serif;
   --font-serif: var(--font-merriweather), serif;
-  --font-lato: var(--font-lato), sans-serif;
+  --font-lato: var(--font-montserrat), sans-serif;
 
   --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
   --animate-marquee: marquee 20s linear infinite;
 
-  --background-image-hero-pattern: linear-gradient(rgba(6, 78, 59, 0.8), rgba(6, 78, 59, 0.6)), url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+  --background-image-hero-pattern: linear-gradient(rgba(0, 89, 96, 0.85), rgba(0, 89, 96, 0.75)), url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
 }
 
 @keyframes fadeInUp {

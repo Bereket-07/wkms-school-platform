@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Merriweather, Outfit, Lato } from "next/font/google";
+import { Merriweather, Montserrat } from "next/font/google";
 import "./globals.css";
 
 const merriweather = Merriweather({
@@ -8,16 +8,10 @@ const merriweather = Merriweather({
   variable: "--font-merriweather",
 });
 
-const outfit = Outfit({
+const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  variable: "--font-outfit",
-});
-
-const lato = Lato({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "700", "900"],
-  variable: "--font-lato",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${merriweather.variable} ${lato.variable} font-sans bg-gray-50 text-emerald-900`}>
+      <body className={`${montserrat.variable} ${merriweather.variable} font-sans bg-gray-50 text-emerald-900`}>
         <Navbar />
         {children}
       </body>

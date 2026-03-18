@@ -59,7 +59,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen font-sans text-slate-800 bg-white selection:bg-emerald-100 selection:text-emerald-900">
+    <main className="min-h-screen font-sans text-slate-800 bg-white selection:bg-brand-light selection:text-brand-dark">
 
       {/* --- HERO SECTION --- */}
       <header className="relative h-screen w-full overflow-hidden flex items-center justify-center">
@@ -72,7 +72,7 @@ export default function Home() {
             className="w-full h-full object-cover"
             src="/hero-video.mp4"
           />
-          <div className="absolute inset-0 bg-emerald-950/60" />
+          <div className="absolute inset-0 bg-brand-dark/75" />
         </div>
 
         <div className="relative z-10 container mx-auto px-6 md:px-12 text-center text-white flex flex-col items-center">
@@ -81,29 +81,27 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <div className="inline-flex items-center gap-2 border border-white/20 bg-white/5 backdrop-blur-md rounded-full px-5 py-2 mb-8 text-sm font-bold tracking-widest font-sans uppercase text-emerald-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_15px_rgba(52,211,153,0.6)]"></span>
-              {_t('hero_badge', "WKMS")}
+            <div className="inline-flex items-center bg-[#004d49]/90 rounded-md px-6 py-2 mb-10 text-[15px] text-white/90 font-light tracking-wide shadow-sm backdrop-blur-sm">
+              Educating for tomorrow
             </div>
-            <h1 className="font-lato font-bold text-white text-5xl md:text-7xl lg:text-8xl leading-tight mb-8 drop-shadow-md">
-              {_t('hero_title_1', "Connecting Education,")} <br />
-              <span className="text-white">
-                {_t('hero_title_accent', "Opportunity & Impact.")}
-              </span>
+            <h1 className="font-sans font-bold text-white text-5xl md:text-7xl lg:text-[80px] leading-[1.1] tracking-tight mb-8 drop-shadow-2xl">
+              Connecting Education, <br className="hidden md:block" />
+              Opportunity & Impact.
             </h1>
-            <p className="text-xl md:text-2xl text-slate-100 max-w-2xl mx-auto mb-10 font-medium leading-relaxed font-sans drop-shadow-sm">
-              {_t('hero_subtitle', "Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.")}
+            <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-12 font-normal leading-relaxed font-sans drop-shadow-md">
+              Providing quality education to 500+ students in rural Ethiopia. <br className="hidden md:block" />
+              We are the bridge between your generosity and their future.
             </p>
-            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center font-sans">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center font-sans">
               <Link
                 href="/donate"
-                className="bg-emerald-600 hover:bg-emerald-500 text-white text-lg px-8 py-3 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-[0_10px_30px_-10px_rgba(16,185,129,0.5)] flex items-center gap-3"
+                className="bg-brand-red hover:bg-[#d4151a] text-white text-[17px] px-8 py-3.5 rounded-md font-medium transition-all duration-300 flex items-center gap-3 shadow-lg"
               >
-                Start donating <ArrowRight className="w-5 h-5" />
+                Start donating <ArrowRight className="w-4 h-4" />
               </Link>
               <button
                 onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-                className="bg-white text-slate-900 hover:bg-slate-50 border-none text-lg px-8 py-3 rounded-full font-medium transition-all duration-300 shadow-xl flex items-center gap-3 hover:-translate-y-1"
+                className="bg-white text-brand-dark hover:bg-slate-50 border-none text-[17px] px-8 py-3.5 rounded-md font-medium transition-all duration-300 shadow-lg flex items-center gap-3"
               >
                 Watch our story <Play className="w-4 h-4 fill-current" />
               </button>
@@ -123,132 +121,141 @@ export default function Home() {
       </header >
 
       {/* Intro Stats Section */}
-      < section className="py-20 bg-white border-b border-slate-100" >
-        <div className="container mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-            <div className="p-6">
-              <h3 className="text-6xl font-lato font-black text-slate-900 mb-2">{_t('impact_stat_1_val', '513')}</h3>
-              <p className="text-slate-500 font-sans text-sm">{_t('impact_stat_1_label', 'Students educated')}</p>
+      <section className="py-24 bg-brand-light">
+        <div className="container mx-auto px-6 md:px-12 max-w-5xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 text-center divide-y md:divide-y-0 md:divide-x divide-brand-dark/20">
+            <div className="py-8 md:py-0 px-6">
+              <h3 className="text-6xl md:text-7xl font-sans font-black text-brand-dark tracking-tight mb-3">{_t('impact_stat_1_val', '513')}</h3>
+              <p className="text-brand-dark/70 font-sans text-base">{_t('impact_stat_1_label', 'Students enrolled')}</p>
             </div>
-            <div className="p-6">
-              <h3 className="text-6xl font-lato font-black text-slate-900 mb-2">{_t('impact_stat_2_val', '98%')}</h3>
-              <p className="text-slate-500 font-sans text-sm">{_t('impact_stat_2_label', 'Passing (Grade 8-12)')}</p>
+            <div className="py-8 md:py-0 px-6">
+              <h3 className="text-6xl md:text-7xl font-sans font-black text-brand-dark tracking-tight mb-3">{_t('impact_stat_2_val', '98%')}</h3>
+              <p className="text-brand-dark/70 font-sans text-base">{_t('impact_stat_2_label', 'Pass rate')}</p>
             </div>
-            <div className="p-6">
-              <h3 className="text-6xl font-lato font-black text-slate-900 mb-2">{_t('impact_stat_3_val', '15+')}</h3>
-              <p className="text-slate-500 font-sans text-sm">{_t('impact_stat_3_label', 'Community Projects')}</p>
+            <div className="py-8 md:py-0 px-6">
+              <h3 className="text-6xl md:text-7xl font-sans font-black text-brand-dark tracking-tight mb-3">{_t('impact_stat_3_val', '15+')}</h3>
+              <p className="text-brand-dark/70 font-sans text-base">{_t('impact_stat_3_label', 'Community Projects')}</p>
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* --- ABOUT SECTION --- */}
-      < section id="about" className="py-24 px-6 md:px-12 bg-white relative overflow-hidden" >
+      <section id="about" className="py-32 px-6 md:px-12 bg-white relative overflow-hidden">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+            {/* Left Graphics */}
             <div className="order-2 lg:order-1 relative">
-              <div className="relative h-[600px] rounded-[3rem] overflow-hidden shadow-2xl">
-                {/* Main About Image */}
+              <div className="relative h-[500px] md:h-[600px] rounded-[1rem] md:rounded-[2rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] border-[6px] border-white">
                 {_t('about_image_main', '') ? (
-                  <Image
+                  <img
                     src={_t('about_image_main')}
                     alt="Students Learning"
-                    fill
-                    className="object-cover"
+                    className="w-full h-full object-cover"
                   />
                 ) : (
                   <div className="w-full h-full bg-slate-200 animate-pulse" />
                 )}
-
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-                <div className="absolute bottom-10 left-10 text-white max-w-xs">
-                  <div className="text-2xl font-serif font-bold mb-2">"Education is the most powerful weapon."</div>
-                  <div className="text-white/80 text-sm">- Nelson Mandela</div>
-                </div>
               </div>
+
               {/* Floating Accent Image */}
-              <div className="absolute -bottom-10 -right-10 w-64 h-64 rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white hidden lg:block">
-                {_t('about_image_accent', '') && (
-                  <Image
+              <div className="absolute -bottom-12 -right-6 md:-right-12 w-48 h-48 md:w-64 md:h-64 rounded-[1rem] overflow-hidden shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] border-[6px] border-white z-20 hidden md:block">
+                {_t('about_image_accent', '') ? (
+                  <img
                     src={_t('about_image_accent')}
                     alt="Classroom"
-                    fill
-                    className="object-cover"
+                    className="w-full h-full object-cover"
                   />
+                ) : (
+                  <div className="w-full h-full bg-slate-200 animate-pulse" />
                 )}
               </div>
             </div>
 
+            {/* Right Content */}
             <div className="order-1 lg:order-2">
-              <span className="text-emerald-600 font-bold tracking-widest uppercase text-sm mb-4 block">{_t('about_badge', 'Who We Are')}</span>
-              <h2 className="text-4xl md:text-6xl font-serif font-bold text-slate-900 mb-8 leading-tight">
-                {_t('about_title_1', 'More Than Just')} <br />
-                <span className="text-emerald-500">{_t('about_title_accent', 'A School.')}</span>
-              </h2>
-              <div className="space-y-6 text-xl text-slate-600 leading-relaxed font-light">
-                <p>{_t('about_text_1', "Wakero Keleboro Memorial Pre-School (WKMS)...")}</p>
-                <p>{_t('about_text_2', "We provide high-quality early childhood education...")}</p>
+              <div className="inline-block border-b-2 border-brand-dark pb-0.5 mb-10">
+                <span className="text-brand-dark font-bold text-[17px]">About Us</span>
+              </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 flex-shrink-0">
-                      <BookOpen className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900">Excellence</h4>
-                      <p className="text-base text-slate-500">World-class curriculum standards.</p>
-                    </div>
+              <h2 className="text-6xl md:text-[85px] font-sans font-black text-brand-dark mb-10 leading-[1] tracking-tight">
+                More than <br className="hidden md:block" />
+                just <span className="text-brand-orange">a school</span>
+              </h2>
+
+              <div className="space-y-6 text-lg md:text-[19px] text-slate-400 font-light leading-relaxed mb-16 max-w-xl">
+                <p>Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.</p>
+                <p>Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.</p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-8 sm:gap-14">
+                {/* Feature 1 */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center text-white flex-shrink-0 shadow-lg shadow-brand-orange/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send-horizontal -rotate-45 ml-1"><path d="m3 3 3 9-3 9 19-9ZM6 12h16" /></svg>
                   </div>
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 flex-shrink-0">
-                      <Users className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900">Community</h4>
-                      <p className="text-base text-slate-500">Built by and for the people.</p>
-                    </div>
+                  <div>
+                    <h4 className="font-bold text-[19px] text-brand-orange leading-tight tracking-tight">Excellence</h4>
+                    <p className="text-[10px] text-slate-500 mt-0.5 tracking-wider">World Class community standards.</p>
+                  </div>
+                </div>
+                {/* Feature 2 */}
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center text-white flex-shrink-0 shadow-lg shadow-brand-orange/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send-horizontal -rotate-45 ml-1"><path d="m3 3 3 9-3 9 19-9ZM6 12h16" /></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-[19px] text-brand-orange leading-tight tracking-tight">Community</h4>
+                    <p className="text-[10px] text-slate-500 mt-0.5 tracking-wider">Built by and for the people.</p>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* --- COMMUNITY SECTION --- */}
-      < section id="community" className="py-32 bg-slate-50 px-6 md:px-12" >
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-20">
-            <span className="text-emerald-600 font-bold tracking-widest uppercase text-sm mb-2 block">{_t('community_badge', 'Our Community')}</span>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-slate-900">{_t('community_title', 'Understanding the Need')}</h2>
+      <section id="community" className="py-32 bg-[#e6f4f1] px-6 md:px-12">
+        <div className="container mx-auto max-w-[1100px]">
+          <div className="text-center mb-16 flex flex-col items-center">
+            <div className="inline-block border-b-[2px] border-brand-dark pb-0.5 mb-6">
+              <span className="text-brand-dark font-bold text-[16px]">Community</span>
+            </div>
+            <h2 className="text-5xl md:text-[75px] font-sans font-black text-brand-dark leading-[1] tracking-[-0.02em]">Understanding the need</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24 font-sans">
-            <div className="bg-amber-100 p-10 rounded-[2.5rem] shadow-sm hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-                <span className="w-2 h-8 bg-amber-500 rounded-full"></span> {_t('community_col1_title', 'The Challenge')}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 font-sans max-w-5xl mx-auto">
+            <div className="bg-white p-10 md:p-12 lg:p-14 rounded-[20px] shadow-sm">
+              <h3 className="text-[22px] font-black text-black mb-10 flex items-center gap-4 tracking-tight">
+                <span className="w-[4px] h-6 bg-brand-red"></span> The Challenge
               </h3>
-              <ul className="space-y-6">
+              <ul className="space-y-8">
                 {[1, 2, 3].map((i) => (
-                  <li key={i} className="flex gap-4">
-                    <span className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-amber-600 font-bold text-sm shrink-0">{i}</span>
-                    <span className="text-slate-800 text-lg font-medium">{_t(`community_challenge_${i}`, 'Challenge details...')}</span>
+                  <li key={i} className="flex gap-6 items-start">
+                    <span className="w-7 h-7 rounded-full bg-brand-red flex items-center justify-center text-white font-medium text-xs shrink-0 mt-0.5">{i}</span>
+                    <span className="text-slate-400 font-normal text-[16px] leading-relaxed max-w-sm">
+                      Lack of nearby schools forces children to walk long distances daily.
+                    </span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="bg-slate-900 p-10 rounded-[2.5rem] shadow-2xl text-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-              <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3 relative z-10">
-                <span className="w-2 h-8 bg-emerald-500 rounded-full"></span> {_t('community_col2_title', 'The WKMS Solution')}
+            <div className="bg-brand-dark p-10 md:p-12 lg:p-14 rounded-[20px] shadow-2xl relative overflow-hidden">
+              <h3 className="text-[22px] font-medium text-white mb-10 flex items-center gap-4 relative z-10 tracking-wide">
+                <span className="w-[4px] h-6 bg-brand-orange"></span> The WKMS Solution
               </h3>
-              <ul className="space-y-6 relative z-10">
+              <ul className="space-y-8 relative z-10">
                 {[1, 2, 3].map((i) => (
-                  <li key={i} className="flex gap-4">
-                    <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-emerald-400 font-bold text-sm shrink-0">✓</span>
-                    <span className="text-slate-300 text-lg font-medium">
-                      <strong>{_t(`community_solution_${i}_label`, 'Solution:')}</strong> {_t(`community_solution_${i}_text`, 'Details...')}
+                  <li key={i} className="flex gap-6 items-start">
+                    <span className="w-7 h-7 rounded-full bg-brand-orange flex items-center justify-center text-white shrink-0 mt-0.5 shadow-md shadow-brand-orange/20">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    </span>
+                    <span className="text-white/80 font-normal text-[16px] leading-relaxed max-w-sm">
+                      <strong className="font-semibold text-white">Local Access:</strong> a safe, high quality school in the heart of the village.
                     </span>
                   </li>
                 ))}
@@ -256,67 +263,92 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section >
+      </section>
 
       {/* --- IMPACT SECTION --- */}
-      < section id="impact" className="py-32 px-6 md:px-12 bg-white text-center" >
+      <section id="impact" className="py-32 px-6 md:px-12 bg-white text-center">
         <div className="container mx-auto max-w-5xl">
-          <span className="text-emerald-600 font-bold tracking-widest uppercase text-sm mb-4 block">{_t('impact_badge', 'Radical Transparency')}</span>
-          <h2 className="text-5xl md:text-7xl font-lato font-black mb-8 text-slate-900">
-            {_t('impact_title', 'Every Cent Counted.')}
-          </h2>
-          <p className="text-2xl md:text-3xl text-slate-500 font-light mb-16 max-w-3xl mx-auto">
-            {_t('impact_subtitle', 'We believe you deserve to know exactly where your money goes. We are committed to absolute financial transparency.')}
-          </p>
+          <div className="text-center mb-16 flex flex-col items-center">
+            <div className="inline-block border-b-[2px] border-brand-dark pb-0.5 mb-6">
+              <span className="text-brand-dark font-bold text-[16px]">Radical Transparency</span>
+            </div>
+            <h2 className="text-6xl md:text-[85px] font-sans font-black text-brand-dark leading-[1] tracking-tight mb-12">
+              Every cent counted
+            </h2>
+            <p className="text-lg md:text-[19px] text-slate-300 font-light max-w-2xl mx-auto leading-relaxed">
+              Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.
+            </p>
+          </div>
 
-          {/* Stats Cards (Reused Logic) */}
-          {/* Stats Cards (Reused Logic) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 font-sans">
-            <div className="aspect-square bg-slate-50 rounded-full flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 p-8">
-              <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 mb-4">
-                <BookOpen className="w-6 h-6" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 font-sans max-w-4xl mx-auto mt-24">
+            
+            {/* Stat 1: Direct Education */}
+            <div className="relative group mx-auto w-64 h-64 flex items-center justify-center -mt-6 rounded-full bg-[#D7F2F1] transition-transform duration-300 hover:scale-105">
+              {/* Outer Dashed Ring */}
+              <div className="absolute inset-0 rounded-full border-[6px] border-dashed border-[#dcf0ec] pointer-events-none scale-110"></div>
+              
+              <div className="relative z-10 flex flex-col items-center justify-center text-center mt-2">
+                <div className="w-[72px] h-[72px] bg-white rounded-full flex items-center justify-center text-brand-orange mb-3 shadow-sm border border-brand-orange/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                </div>
+                <div className="text-[44px] font-sans font-black text-brand-dark mb-1 leading-none tracking-tight">60%</div>
+                <h3 className="text-[14px] font-light font-sans text-brand-dark tracking-wide">Direct Education</h3>
               </div>
-              <div className="text-5xl font-lato font-black text-slate-900 mb-2">60%</div>
-              <h3 className="text-xl font-bold text-slate-600">Direct Education</h3>
             </div>
-            <div className="aspect-square bg-slate-50 rounded-full flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 p-8">
-              <div className="w-12 h-12 bg-amber-100 rounded-full flex items-center justify-center text-amber-600 mb-4">
-                <UserCheck className="w-6 h-6" />
+
+            {/* Stat 2: Student Welfare */}
+            <div className="relative group mx-auto w-64 h-64 flex items-center justify-center -mt-6 rounded-full bg-[#D7F2F1] transition-transform duration-300 hover:scale-105">
+              {/* Outer Dashed Ring */}
+              <div className="absolute inset-0 rounded-full border-[6px] border-dashed border-[#dcf0ec] pointer-events-none scale-110"></div>
+              
+              <div className="relative z-10 flex flex-col items-center justify-center text-center mt-2">
+                <div className="w-[72px] h-[72px] bg-white rounded-full flex items-center justify-center text-brand-orange mb-3 shadow-sm border border-brand-orange/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+                </div>
+                <div className="text-[44px] font-sans font-black text-brand-dark mb-1 leading-none tracking-tight">30%</div>
+                <h3 className="text-[14px] font-light font-sans text-brand-dark tracking-wide">Student Welfare</h3>
               </div>
-              <div className="text-5xl font-lato font-black text-slate-900 mb-2">30%</div>
-              <h3 className="text-xl font-bold text-slate-600">Student Welfare</h3>
             </div>
-            <div className="aspect-square bg-slate-50 rounded-full flex flex-col items-center justify-center text-center hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 p-8">
-              <div className="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center text-slate-600 mb-4">
-                <PieChart className="w-6 h-6" />
+
+            {/* Stat 3: Ops & Admin */}
+            <div className="relative group mx-auto w-64 h-64 flex items-center justify-center -mt-6 rounded-full bg-[#D7F2F1] transition-transform duration-300 hover:scale-105">
+              {/* Outer Dashed Ring */}
+              <div className="absolute inset-0 rounded-full border-[6px] border-dashed border-[#dcf0ec] pointer-events-none scale-110"></div>
+              
+              <div className="relative z-10 flex flex-col items-center justify-center text-center mt-2">
+                <div className="w-[72px] h-[72px] bg-white rounded-full flex items-center justify-center text-brand-orange mb-3 shadow-sm border border-brand-orange/10">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+                </div>
+                <div className="text-[44px] font-sans font-black text-brand-dark mb-1 leading-none tracking-tight">10%</div>
+                <h3 className="text-[14px] font-light font-sans text-brand-dark tracking-wide">Ops & Admin</h3>
               </div>
-              <div className="text-5xl font-lato font-black text-slate-900 mb-2">10%</div>
-              <h3 className="text-xl font-bold text-slate-600">Ops & Admin</h3>
             </div>
+
           </div>
         </div>
-      </section >
+      </section>
 
       {/* --- MEDIA SECTION (IMAGES) --- */}
-      < section id="media" className="py-32 bg-slate-900 text-white relative overflow-hidden" >
+      <section id="media" className="py-24 md:py-32 bg-brand-dark text-white relative overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 text-center relative z-10">
-          <span className="text-emerald-400 font-bold tracking-widest uppercase text-sm mb-4 block">Our Gallery</span>
-          <h2 className="text-4xl md:text-6xl font-lato font-black text-white leading-tight mb-16">Stories in Pictures.</h2>
+          <h2 className="text-5xl md:text-[75px] font-sans font-black text-white leading-[1] tracking-[-0.02em] mb-16 md:mb-24">
+            Stories in pictures
+          </h2>
 
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-pulse">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 animate-pulse">
               {[1, 2, 3].map(i => (
-                <div key={i} className="bg-slate-800 rounded-3xl aspect-[4/3]"></div>
+                <div key={i} className="bg-slate-800 aspect-[16/10]"></div>
               ))}
             </div>
           ) : (
-            <div className="relative w-full overflow-hidden -mx-4 md:-mx-12 py-10">
+            <div className="relative w-full overflow-hidden -mx-4 md:-mx-12 py-4">
               {/* Gradient Masks */}
-              <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-slate-900 to-transparent z-10 pointer-events-none"></div>
-              <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-slate-900 to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute left-0 top-0 bottom-0 w-24 md:w-56 bg-gradient-to-r from-brand-dark to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-24 md:w-56 bg-gradient-to-l from-brand-dark to-transparent z-10 pointer-events-none"></div>
 
               <motion.div
-                className="flex gap-8 w-max"
+                className="flex gap-6 md:gap-8 w-max"
                 animate={{ x: "-50%" }}
                 transition={{
                   repeat: Infinity,
@@ -328,45 +360,52 @@ export default function Home() {
                 {[...mediaItems, ...mediaItems].map((item, index) => (
                   <div
                     key={`img-${item.id}-${index}`}
-                    className="relative w-[300px] md:w-[400px] aspect-[4/3] rounded-[2rem] overflow-hidden shrink-0 group cursor-pointer border-4 border-slate-800 hover:border-emerald-500 transition-colors duration-300"
+                    className="relative w-[280px] md:w-[480px] aspect-[16/10] overflow-hidden shrink-0 group cursor-pointer"
                   >
                     <img
                       src={item.url}
                       alt={item.title || "Gallery"}
-                      className="w-full h-full object-cover transform transition duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover transform transition duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 text-left">
-                      <p className="text-white font-bold text-xl line-clamp-1">{item.title || "Stories of Hope"}</p>
-                    </div>
                   </div>
                 ))}
               </motion.div>
             </div>
           )}
+
+          {/* Dots Navigation Placeholder */}
+          <div className="flex justify-center items-center gap-3.5 mt-16 md:mt-20">
+            <div className="w-[11px] h-[11px] rounded-full border-[2px] border-white"></div>
+            <div className="w-[11px] h-[11px] rounded-full border-[2px] border-white"></div>
+            <div className="w-[11px] h-[11px] rounded-full border-[2px] border-white"></div>
+            <div className="w-[11px] h-[11px] rounded-full border-[2px] border-white"></div>
+            <div className="w-[11px] h-[11px] rounded-full bg-white"></div>
+            <div className="w-[11px] h-[11px] rounded-full border-[2px] border-white"></div>
+          </div>
         </div>
-      </section >
+      </section>
 
       {/* --- VIDEO GALLERY SECTION --- */}
-      < section id="videos" className="py-32 bg-[#050505] text-white relative overflow-hidden" >
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
+      < section id="videos" className="py-32 bg-white text-brand-dark relative overflow-hidden" >
+        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         {/* Cinematic Glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-amber-600/10 blur-[150px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-brand-light/30 blur-[150px] rounded-full pointer-events-none"></div>
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="text-center mb-16 space-y-4">
-            <span className="text-amber-500 font-bold tracking-[0.2em] uppercase text-xs">Experience WKMS</span>
-            <h2 className="text-4xl md:text-6xl font-lato font-black text-white tracking-tight">
+            <span className="text-brand-dark font-bold tracking-[0.2em] uppercase text-xs">Experience WKMS</span>
+            <h2 className="text-4xl md:text-6xl font-lato font-black text-brand-dark tracking-tight">
               Highlights in Motion
             </h2>
           </div>
 
           {loading ? (
-            <div className="max-w-5xl mx-auto aspect-video bg-slate-800/50 rounded-3xl animate-pulse border border-white/5"></div>
+            <div className="max-w-5xl mx-auto aspect-video bg-slate-100 rounded-3xl animate-pulse border border-slate-200"></div>
           ) : videoItems.length > 0 ? (
             <div className="max-w-6xl mx-auto relative group">
 
               {/* Main Stage */}
-              <div className="relative aspect-video bg-black rounded-[2rem] overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.7)] border border-white/10 ring-1 ring-white/5">
+              <div className="relative aspect-video bg-slate-900 rounded-[2rem] overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.2)] border border-slate-200">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentVideoIndex}
@@ -389,15 +428,15 @@ export default function Home() {
                 <>
                   <button
                     onClick={prevVideo}
-                    className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 w-14 h-14 bg-white/5 hover:bg-amber-500 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg z-20 group/nav"
+                    className="absolute top-1/2 -left-4 md:-left-12 -translate-y-1/2 w-14 h-14 bg-white/50 hover:bg-brand-red backdrop-blur-md rounded-full flex items-center justify-center text-brand-dark hover:text-white transition-all duration-300 hover:scale-110 shadow-lg z-20"
                   >
-                    <ArrowRight className="w-6 h-6 rotate-180 group-hover/nav:text-black transition-colors" />
+                    <ArrowRight className="w-6 h-6 rotate-180 transition-colors" />
                   </button>
                   <button
                     onClick={nextVideo}
-                    className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 w-14 h-14 bg-white/5 hover:bg-amber-500 backdrop-blur-md rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-lg z-20 group/nav"
+                    className="absolute top-1/2 -right-4 md:-right-12 -translate-y-1/2 w-14 h-14 bg-white/50 hover:bg-brand-red backdrop-blur-md rounded-full flex items-center justify-center text-brand-dark hover:text-white transition-all duration-300 hover:scale-110 shadow-lg z-20"
                   >
-                    <ArrowRight className="w-6 h-6 group-hover/nav:text-black transition-colors" />
+                    <ArrowRight className="w-6 h-6 transition-colors" />
                   </button>
                 </>
               )}
@@ -410,11 +449,11 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 font-lato">
+                  <h3 className="text-2xl md:text-3xl font-bold text-brand-dark mb-2 font-lato">
                     {videoItems[currentVideoIndex].title || "Untitled Video"}
                   </h3>
                   {videoItems[currentVideoIndex].description && (
-                    <p className="text-slate-400 text-lg leading-relaxed">
+                    <p className="text-slate-600 text-lg leading-relaxed">
                       {videoItems[currentVideoIndex].description}
                     </p>
                   )}
@@ -427,7 +466,7 @@ export default function Home() {
                       <button
                         key={idx}
                         onClick={() => setCurrentVideoIndex(idx)}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentVideoIndex ? 'w-8 bg-amber-500' : 'w-2 bg-white/20 hover:bg-white/40'}`}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentVideoIndex ? 'w-8 bg-brand-red' : 'w-2 bg-slate-200 hover:bg-slate-300'}`}
                       />
                     ))}
                   </div>
@@ -436,11 +475,11 @@ export default function Home() {
 
             </div>
           ) : (
-            <div className="text-center py-24 bg-white/5 rounded-[3rem] border border-white/5 max-w-4xl mx-auto backdrop-blur-sm">
-              <div className="w-20 h-20 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Camera className="w-10 h-10 text-slate-600" />
+            <div className="text-center py-24 bg-brand-light/20 rounded-[3rem] border border-brand-light max-w-4xl mx-auto backdrop-blur-sm">
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                <Camera className="w-10 h-10 text-brand-dark" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-300 mb-2">No videos yet</h3>
+              <h3 className="text-2xl font-bold text-brand-dark mb-2">No videos yet</h3>
               <p className="text-slate-500">We are busy capturing moments. Check back soon!</p>
             </div>
           )}
@@ -448,71 +487,116 @@ export default function Home() {
       </section >
 
       {/* Featured Campaign Section (CTA) */}
-      < section className="py-24 px-6 md:px-12 bg-emerald-50 relative overflow-hidden" >
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-        <div className="container mx-auto max-w-6xl relative z-10">
-          <div className="bg-white rounded-[3rem] p-10 md:p-16 shadow-2xl border border-emerald-100 text-center">
-            <span className="text-emerald-600 font-bold tracking-widest uppercase text-xs mb-4 block">Take Action</span>
-            <h2 className="text-4xl md:text-6xl font-lato font-black text-slate-900 leading-tight mb-8">
-              Ready to Change a Life?
-            </h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-10">
-              Your contribution, big or small, goes directly to where it's needed most. Join us in building a brighter future.
-            </p>
-
-            <Link href="/donate" className="inline-flex items-center gap-3 bg-slate-900 text-white text-xl px-12 py-5 rounded-full font-bold hover:bg-slate-800 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
-              Make a Donation <Heart className="w-6 h-6 fill-rose-500 text-rose-500" />
-            </Link>
+      <section className="py-24 px-6 md:px-12 bg-[#f8fafc] relative overflow-hidden flex justify-center items-center">
+        <div className="container mx-auto max-w-5xl">
+          <div className="bg-brand-dark rounded-[1.5rem] p-12 md:p-20 shadow-2xl text-center relative overflow-hidden">
+            <div className="flex flex-col items-center mb-8 relative z-10">
+              <div className="inline-block border-b border-white pb-1 mb-6">
+                <span className="text-white font-medium text-[15px] tracking-wide">Take action</span>
+              </div>
+              <h2 className="text-5xl md:text-[68px] font-sans font-black text-white leading-[1] tracking-tight mb-8">
+                Ready to change a life?
+              </h2>
+              <p className="text-[17px] text-white/50 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
+                Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.
+              </p>
+              
+              <Link href="/donate" className="inline-flex items-center gap-2.5 bg-brand-red text-white text-[15px] px-8 py-3.5 rounded-md font-medium hover:bg-[#d4151a] shadow-lg transition-colors">
+                Make a donation <Heart className="w-4 h-4 fill-white text-white" />
+              </Link>
+            </div>
           </div>
         </div>
-      </section >
+      </section>
 
 
       {/* Contact Section */}
       < ContactSection />
 
       {/* Footer */}
-      < footer className="bg-white pt-24 pb-12 border-t border-slate-100" >
-        <div className="container mx-auto px-6 md:px-12 text-center md:text-left">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div className="md:col-span-1">
-              <span className="font-lato font-black text-2xl text-slate-900 block mb-4">WKMS</span>
-              <p className="text-slate-500 text-sm leading-relaxed">
-                {_t('footer_desc', "Wakero Keleboro Memorial Pre-School. Empowering rural communities through education.")}
-              </p>
+      <footer className="bg-white pt-24 pb-16">
+        <div className="container mx-auto px-6 md:px-12 flex flex-col lg:flex-row justify-between items-start gap-16">
+          <div className="lg:max-w-xs">
+            <div className="w-48 md:w-56 mb-6">
+              <img
+                src={_t('logo_main', '/wkmslogo.svg')}
+                alt="WKMS Logo"
+                className="w-full h-auto object-contain"
+              />
             </div>
-            <div>
-              <h4 className="font-bold text-slate-900 mb-6">Explore</h4>
-              <ul className="space-y-4 text-sm text-slate-500">
-                <li><button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-emerald-600 transition">About Us</button></li>
-                <li><button onClick={() => document.getElementById('impact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-emerald-600 transition">Our Impact</button></li>
-                <li><button onClick={() => document.getElementById('media')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-emerald-600 transition">Gallery</button></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-slate-900 mb-6">Connect</h4>
-              <ul className="space-y-4 text-sm text-slate-500">
-                <li><a href="#" className="hover:text-emerald-600 transition">Facebook</a></li>
-                <li><a href="#" className="hover:text-emerald-600 transition">Instagram</a></li>
-                <li><a href="#" className="hover:text-emerald-600 transition">Contact Us</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-slate-900 mb-6">Legal</h4>
-              <ul className="space-y-4 text-sm text-slate-500">
-                <li><a href="#" className="hover:text-emerald-600 transition">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-emerald-600 transition">Terms of Service</a></li>
-              </ul>
-            </div>
+            <p className="text-[#6b9c97] text-[13px] font-medium max-w-[250px] leading-relaxed">
+              Wakero Keleboro Memorial Pre-School. Empowering rural communities in Ethiopia through quality education.
+            </p>
           </div>
-          <div className="border-t border-slate-100 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-400">
-            <p>&copy; {new Date().getFullYear()} WKMS. All rights reserved.</p>
-            <div className="flex gap-4 mt-4 md:mt-0">
-              <span>Designed with ❤️ for Education</span>
+          
+          <div className="flex flex-wrap md:flex-nowrap gap-16 lg:gap-24">
+            <div>
+              <h4 className="font-bold text-brand-dark text-[15px] mb-6">Explore</h4>
+              <ul className="space-y-4 text-[13px] font-medium text-[#6b9c97]">
+                <li><button onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-brand-dark transition">About Us</button></li>
+                <li><button onClick={() => document.getElementById('impact')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-brand-dark transition">Our Impact</button></li>
+                <li><button onClick={() => document.getElementById('media')?.scrollIntoView({ behavior: 'smooth' })} className="hover:text-brand-dark transition">Gallery</button></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-brand-dark text-[15px] mb-6">Connect</h4>
+              <div className="flex flex-wrap gap-3">
+                {/* Facebook */}
+                {_t('social_facebook') && (
+                  <a href={_t('social_facebook')} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-emerald-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  </a>
+                )}
+                {/* Instagram */}
+                {_t('social_instagram') && (
+                  <a href={_t('social_instagram')} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-emerald-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                  </a>
+                )}
+                {/* Youtube */}
+                {_t('social_youtube') && (
+                  <a href={_t('social_youtube')} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-emerald-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+                  </a>
+                )}
+                {/* TikTok */}
+                {_t('social_tiktok') && (
+                  <a href={_t('social_tiktok')} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-emerald-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                  </a>
+                )}
+                {/* WhatsApp */}
+                {_t('social_whatsapp') && (
+                  <a href={_t('social_whatsapp')} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-emerald-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                  </a>
+                )}
+                {/* Linkedin */}
+                {_t('social_linkedin') && (
+                  <a href={_t('social_linkedin')} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-emerald-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                  </a>
+                )}
+                {/* X/Twitter */}
+                {_t('social_twitter') && (
+                  <a href={_t('social_twitter')} target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-brand-dark rounded-full flex items-center justify-center text-white hover:bg-emerald-700 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                )}
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="font-bold text-brand-dark text-[15px] mb-6">Legal</h4>
+              <ul className="space-y-4 text-[13px] font-medium text-[#6b9c97]">
+                <li><a href="#" className="hover:text-brand-dark transition">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-brand-dark transition">Terms of Service</a></li>
+              </ul>
             </div>
           </div>
         </div>
-      </footer >
+      </footer>
     </main >
   );
 }

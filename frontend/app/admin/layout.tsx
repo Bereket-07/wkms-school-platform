@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import { Menu } from "lucide-react";
@@ -80,10 +81,15 @@ export default function AdminLayout({
                     </div>
 
                     <div className="flex items-center gap-4">
-                        <h2 className="text-sm font-bold text-slate-900 lg:hidden">
-                            WKMS Admin
-                        </h2>
-                        <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 font-bold text-xs ring-2 ring-white ring-offset-2 ring-offset-slate-50">
+                        <div className="flex items-center gap-2 lg:hidden">
+                            <div className="relative w-6 h-6">
+                                <img src="/wkmslogo.svg" alt="WKMS Logo" className="w-full h-full object-contain" />
+                            </div>
+                            <h2 className="text-sm font-bold text-slate-900">
+                                Admin
+                            </h2>
+                        </div>
+                        <div className="w-8 h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-dark font-bold text-xs ring-2 ring-white ring-offset-2 ring-offset-slate-50">
                             A
                         </div>
                     </div>

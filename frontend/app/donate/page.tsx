@@ -46,7 +46,7 @@ function DonationStatusListener({ onPaymentSuccess }: { onPaymentSuccess: (campa
     if (verifying) {
         return (
             <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm text-white">
-                <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                <div className="w-16 h-16 border-4 border-brand-red border-t-transparent rounded-full animate-spin mb-4"></div>
                 <h2 className="text-xl font-bold">Verifying Donation...</h2>
                 <p className="text-slate-300">Please wait a moment.</p>
             </div>
@@ -110,9 +110,9 @@ export default function DonatePage() {
             </Suspense>
 
             {/* Light Glassmorphism Background Blobs */}
-            <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-emerald-50/80 to-slate-50 pointer-events-none" />
-            <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-emerald-100/40 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute top-40 -left-20 w-[400px] h-[400px] bg-amber-100/40 rounded-full blur-[80px] pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-brand-light/80 to-slate-50 pointer-events-none" />
+            <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-brand-light/40 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-40 -left-20 w-[400px] h-[400px] bg-orange-50/40 rounded-full blur-[80px] pointer-events-none" />
 
             {/* Modal */}
             <AnimatePresence>
@@ -131,9 +131,9 @@ export default function DonatePage() {
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-emerald-100 text-emerald-600 text-xs font-bold uppercase tracking-widest shadow-sm"
+                            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-brand-light text-brand-dark text-xs font-bold uppercase tracking-widest shadow-sm"
                         >
-                            <Sparkles className="w-3 h-3 text-emerald-500" /> {_t('donate_badge', "Support Our Mission")}
+                            <Sparkles className="w-3 h-3 text-brand-orange" /> {_t('donate_badge', "Support Our Mission")}
                         </motion.div>
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
@@ -141,7 +141,7 @@ export default function DonatePage() {
                             transition={{ delay: 0.1 }}
                             className="text-4xl md:text-6xl font-serif font-bold text-slate-900 leading-tight"
                         >
-                            {_t('donate_title_1', "Invest in a")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">{_t('donate_title_accent', "Child's Future")}</span>
+                            {_t('donate_title_1', "Invest in a")} <span className="text-brand-red">{_t('donate_title_accent', "Child's Future")}</span>
                         </motion.h1>
                         <motion.p
                             initial={{ opacity: 0, y: 20 }}
@@ -176,16 +176,16 @@ export default function DonatePage() {
                                 <p className="text-slate-300 text-lg leading-relaxed">
                                     Support the school's most critical daily needs. Your donation provides flexibility to address immediate challenges, pay teachers, and maintain facilities.
                                 </p>
-                                <div className="flex items-center gap-4 text-emerald-400 font-bold text-sm uppercase tracking-wide">
+                                <div className="flex items-center gap-4 text-brand-orange font-bold text-sm uppercase tracking-wide">
                                     <Sparkles className="w-5 h-5" /> Area of Greatest Need
                                 </div>
                             </div>
 
                             <button
                                 onClick={() => openDonationModal()}
-                                className="bg-white text-emerald-900 px-10 py-5 rounded-2xl font-bold text-lg hover:bg-emerald-50 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 flex-shrink-0 flex items-center gap-3"
+                                className="bg-white text-brand-dark px-10 py-5 rounded-2xl font-bold text-lg hover:bg-brand-light transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-105 active:scale-95 flex-shrink-0 flex items-center gap-3"
                             >
-                                <Heart className="w-6 h-6 text-emerald-600 fill-emerald-600" /> Donate to School
+                                <Heart className="w-6 h-6 text-brand-red fill-current" /> Donate to School
                             </button>
                         </div>
                     </motion.div>
@@ -212,7 +212,7 @@ export default function DonatePage() {
                                     viewport={{ once: true }}
                                     transition={{ delay: idx * 0.1 }}
                                     whileHover={{ y: -8 }}
-                                    className="group relative bg-white/80 backdrop-blur-xl rounded-[2.5rem] border border-white/50 overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(16,185,129,0.15)] shadow-xl transition-all duration-500"
+                                    className="group relative bg-white/80 backdrop-blur-xl rounded-[2.5rem] border border-white/50 overflow-hidden hover:shadow-[0_20px_40px_-15px_rgba(0,89,96,0.15)] shadow-xl transition-all duration-500"
                                 >
 
                                     {/* Image Area - Taller and Glamorous */}
@@ -224,7 +224,7 @@ export default function DonatePage() {
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                                         />
                                         <div className="absolute top-6 left-6 z-20">
-                                            <span className="bg-white/95 text-emerald-700 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider backdrop-blur-md shadow-lg border border-emerald-50">
+                                            <span className="bg-white/95 text-brand-dark text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider backdrop-blur-md shadow-lg border border-brand-light">
                                                 Active Campaign
                                             </span>
                                         </div>
@@ -232,7 +232,7 @@ export default function DonatePage() {
 
                                     {/* Content */}
                                     <div className="p-8 relative">
-                                        <h3 className="text-3xl font-serif font-bold text-slate-900 mb-4 group-hover:text-emerald-700 transition-colors">{campaign.title}</h3>
+                                        <h3 className="text-3xl font-serif font-bold text-slate-900 mb-4 group-hover:text-brand-red transition-colors">{campaign.title}</h3>
                                         <p className="text-slate-600 mb-8 line-clamp-2 leading-relaxed text-base">{campaign.description}</p>
 
                                         {/* Progress Section */}
@@ -248,14 +248,14 @@ export default function DonatePage() {
                                                     </div>
                                                 </div>
                                                 <div className="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
-                                                    <div className="bg-sky-500 h-full rounded-full shadow-sm" style={{ width: `${Math.min(100, ((campaign.current_raised_usd || 0) / (campaign.goal_amount_usd || 1)) * 100)}%` }}></div>
+                                                    <div className="bg-brand-dark h-full rounded-full shadow-sm" style={{ width: `${Math.min(100, ((campaign.current_raised_usd || 0) / (campaign.goal_amount_usd || 1)) * 100)}%` }}></div>
                                                 </div>
                                             </div>
 
                                             {/* Local Goal - Smaller */}
                                             <div className="space-y-2">
                                                 <div className="flex justify-between items-end text-sm">
-                                                    <div className="flex items-center gap-2 text-emerald-600 font-bold uppercase tracking-wide">
+                                                    <div className="flex items-center gap-2 text-brand-dark font-bold uppercase tracking-wide">
                                                         <Users className="w-4 h-4" /> Local Goal (ETB)
                                                     </div>
                                                     <div className="text-slate-700 font-medium">
@@ -263,7 +263,7 @@ export default function DonatePage() {
                                                     </div>
                                                 </div>
                                                 <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                                                    <div className="bg-emerald-500 h-full rounded-full shadow-sm" style={{ width: `${Math.min(100, ((campaign.current_raised_etb || 0) / (campaign.goal_amount_etb || 1)) * 100)}%` }}></div>
+                                                    <div className="bg-brand-orange h-full rounded-full shadow-sm" style={{ width: `${Math.min(100, ((campaign.current_raised_etb || 0) / (campaign.goal_amount_etb || 1)) * 100)}%` }}></div>
                                                 </div>
                                             </div>
 
@@ -271,7 +271,7 @@ export default function DonatePage() {
                                             <div className="pt-6">
                                                 <button
                                                     onClick={() => openDonationModal(campaign.title)}
-                                                    className="w-full group/btn relative overflow-hidden bg-gradient-to-r from-emerald-600 to-teal-500 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-emerald-200 transition-all active:scale-[0.98]"
+                                                    className="w-full group/btn relative overflow-hidden bg-brand-red text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg hover:shadow-brand-red/30 transition-all active:scale-[0.98]"
                                                 >
                                                     <span className="relative z-10 flex items-center justify-center gap-2">
                                                         Donate Now <Heart className="w-5 h-5 fill-white/0 group-hover/btn:fill-white transition-colors duration-300" />

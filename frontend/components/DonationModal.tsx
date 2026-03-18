@@ -86,12 +86,12 @@ const CheckoutForm = ({ campaignTitle, onClose, amount, email, clientSecret }: C
     if (success) {
         return (
             <div className="text-center py-10 animate-in zoom-in duration-300">
-                <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-emerald-100/50">
+                <div className="w-20 h-20 bg-brand-light text-brand-dark rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-brand-light/50">
                     <ShieldCheck className="w-10 h-10" />
                 </div>
-                <h3 className="text-2xl font-lato font-black text-emerald-900 mb-2">Thank You!</h3>
+                <h3 className="text-2xl font-lato font-black text-brand-dark mb-2">Thank You!</h3>
                 <p className="text-slate-600 mb-8 max-w-sm mx-auto">Your donation has been successfully processed and will directly help the children.</p>
-                <button onClick={onClose} className="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold hover:bg-emerald-500 shadow-lg shadow-emerald-200 transition-all active:scale-95">Close</button>
+                <button onClick={onClose} className="bg-brand-red text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 shadow-lg shadow-brand-red/30 transition-all active:scale-95">Close</button>
             </div>
         )
     }
@@ -134,12 +134,12 @@ export default function DonationModal({ campaignTitle, onClose, defaultSuccess =
                 <div className="bg-white rounded-[2rem] w-full max-w-lg shadow-2xl overflow-hidden relative z-10 animate-in fade-in zoom-in-95 duration-300 border border-white/20 flex flex-col max-h-[85vh]">
                     <button onClick={onClose} className="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600 rounded-full z-20 hover:bg-slate-100 transition-colors"><X className="w-5 h-5" /></button>
                     <div className="text-center py-6 overflow-y-auto">
-                        <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-emerald-100/50">
+                        <div className="w-20 h-20 bg-brand-light text-brand-dark rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl shadow-brand-light/50">
                             <ShieldCheck className="w-10 h-10" />
                         </div>
-                        <h3 className="text-2xl font-lato font-black text-emerald-900 mb-2">Thank You!</h3>
+                        <h3 className="text-2xl font-lato font-black text-brand-dark mb-2">Thank You!</h3>
                         <p className="text-slate-600 mb-8 max-w-sm mx-auto">Your donation was successfully confirmed.</p>
-                        <button onClick={onClose} className="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold hover:bg-emerald-500 shadow-lg shadow-emerald-200 transition-all active:scale-95">Close</button>
+                        <button onClick={onClose} className="bg-brand-red text-white px-8 py-3 rounded-full font-bold hover:bg-red-700 shadow-lg shadow-brand-red/30 transition-all active:scale-95">Close</button>
                     </div>
                 </div>
             </div>
@@ -214,8 +214,8 @@ export default function DonationModal({ campaignTitle, onClose, defaultSuccess =
                 {/* Header */}
                 <div className="bg-slate-50 border-b border-slate-100 px-8 py-5 flex justify-between items-center flex-shrink-0">
                     <div>
-                        <h2 className="text-xl font-lato font-black text-slate-900">Make a Donation</h2>
-                        <p className="text-emerald-600 font-medium text-xs uppercase tracking-wide mt-1">
+                        <h2 className="text-xl font-lato font-black text-brand-dark">Make a Donation</h2>
+                        <p className="text-brand-orange font-bold text-xs uppercase tracking-wide mt-1">
                             {campaignTitle ? `For: ${campaignTitle}` : "For: General School Fund"}
                         </p>
                     </div>
@@ -239,8 +239,8 @@ export default function DonationModal({ campaignTitle, onClose, defaultSuccess =
                                             key={val}
                                             onClick={() => setAmount(val)}
                                             className={`py-3 rounded-xl font-bold border-2 transition-all duration-200 ${amount === val
-                                                ? 'border-emerald-500 bg-emerald-500 text-white shadow-lg shadow-emerald-200 scale-105'
-                                                : 'border-slate-100 bg-slate-50 text-slate-600 hover:border-emerald-200 hover:bg-white'}`}
+                                                ? 'border-brand-dark bg-brand-dark text-brand-light shadow-lg shadow-brand-dark/30 scale-105'
+                                                : 'border-slate-100 bg-slate-50 text-slate-600 hover:border-brand-dark hover:bg-white'}`}
                                         >
                                             {gateway === 'stripe' ? '$' : 'ETB '}{val}
                                         </button>
@@ -254,7 +254,7 @@ export default function DonationModal({ campaignTitle, onClose, defaultSuccess =
                                         type="number"
                                         value={amount}
                                         onChange={(e) => setAmount(e.target.value)}
-                                        className="w-full pl-16 pr-4 py-4 rounded-xl bg-slate-50 border-2 border-slate-100 focus:outline-none focus:border-emerald-500 focus:bg-white focus:ring-4 focus:ring-emerald-500/10 font-bold text-xl transition-all"
+                                        className="w-full pl-16 pr-4 py-4 rounded-xl bg-slate-50 border-2 border-slate-100 focus:outline-none focus:border-brand-dark focus:bg-white focus:ring-4 focus:ring-brand-light/30 font-bold text-xl transition-all"
                                         placeholder="Enter custom amount"
                                     />
                                 </div>
@@ -287,10 +287,10 @@ export default function DonationModal({ campaignTitle, onClose, defaultSuccess =
                                     <div
                                         onClick={() => setGateway("chapa")}
                                         className={`cursor-pointer p-4 rounded-xl border-2 transition-all duration-300 flex items-center gap-4 relative overflow-hidden group ${gateway === 'chapa'
-                                            ? 'border-emerald-500 bg-emerald-50/50 shadow-lg ring-1 ring-emerald-500'
-                                            : 'border-slate-100 hover:border-emerald-200 hover:bg-slate-50'}`}
+                                            ? 'border-brand-dark bg-brand-light shadow-lg ring-1 ring-brand-dark'
+                                            : 'border-slate-100 hover:border-brand-dark hover:bg-slate-50'}`}
                                     >
-                                        <div className={`w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center transition-colors ${gateway === 'chapa' ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-400 group-hover:bg-emerald-100 group-hover:text-emerald-500'}`}>
+                                        <div className={`w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center transition-colors ${gateway === 'chapa' ? 'bg-brand-dark text-white' : 'bg-slate-100 text-slate-400 group-hover:bg-brand-light group-hover:text-brand-dark'}`}>
                                             <Wallet className="w-6 h-6" />
                                         </div>
                                         <div>
@@ -298,8 +298,8 @@ export default function DonationModal({ campaignTitle, onClose, defaultSuccess =
                                             <div className="text-xs text-slate-500">Chapa (ETB)</div>
                                         </div>
                                         {gateway === 'chapa' && (
-                                            <div className="absolute top-2 right-2 text-emerald-500">
-                                                <div className="w-3 h-3 bg-emerald-500 rounded-full shadow-[0_0_0_2px_white]" />
+                                            <div className="absolute top-2 right-2 text-brand-dark">
+                                                <div className="w-3 h-3 bg-brand-dark rounded-full shadow-[0_0_0_2px_white]" />
                                             </div>
                                         )}
                                     </div>
@@ -319,7 +319,7 @@ export default function DonationModal({ campaignTitle, onClose, defaultSuccess =
                                             type="email"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
-                                            className="w-full px-4 py-3 rounded-xl bg-white border-2 border-slate-200 focus:outline-none focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 transition-all placeholder:text-slate-400"
+                                            className="w-full px-4 py-3 rounded-xl bg-white border-2 border-slate-200 focus:outline-none focus:border-brand-dark focus:ring-4 focus:ring-brand-light transition-all placeholder:text-slate-400"
                                             placeholder="name@example.com"
                                         />
                                     </div>
@@ -330,7 +330,7 @@ export default function DonationModal({ campaignTitle, onClose, defaultSuccess =
                                 onClick={initializePayment}
                                 disabled={loadingSecret}
                                 className={`w-full text-white py-4 rounded-2xl font-bold hover:opacity-90 transition-all shadow-xl disabled:opacity-70 flex justify-center items-center gap-2 group transform active:scale-[0.98] ${gateway === 'chapa'
-                                    ? 'bg-emerald-600 shadow-emerald-200'
+                                    ? 'bg-brand-red shadow-brand-red/30'
                                     : 'bg-slate-900 shadow-slate-200'
                                     }`}
                             >

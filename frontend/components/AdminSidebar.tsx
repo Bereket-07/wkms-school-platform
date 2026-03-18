@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
     LayoutDashboard,
@@ -35,11 +36,20 @@ export default function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
     return (
         <div className="w-64 bg-slate-900 text-slate-300 min-h-screen flex flex-col h-full">
             <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900">
-                <div>
-                    <h1 className="text-xl font-serif font-bold text-white tracking-wide">
-                        WKMS <span className="text-emerald-500">Admin</span>
-                    </h1>
-                    <p className="text-xs text-slate-500 mt-1 uppercase tracking-wider">Management Console</p>
+                <div className="flex items-center gap-3">
+                    <div className="relative w-10 h-10 flex-shrink-0">
+                        <img
+                            src="/wkmslogo.svg"
+                            alt="WKMS Logo"
+                            className="w-full h-full object-contain"
+                        />
+                    </div>
+                    <div>
+                        <h1 className="text-xl font-serif font-bold text-white tracking-wide flex items-center gap-2">
+                            <span className="text-emerald-500">Admin</span>
+                        </h1>
+                        <p className="text-xs text-slate-500 mt-1 uppercase tracking-wider">Management Console</p>
+                    </div>
                 </div>
                 {/* Close Button (Mobile Only) */}
                 <button

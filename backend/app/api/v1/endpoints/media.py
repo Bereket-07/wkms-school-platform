@@ -86,7 +86,7 @@ async def upload_file(
     logger.info(f"Received upload request for file: {file.filename}")
     
     try:
-        UPLOAD_DIR = "/app/static/uploads" # Use absolute path inside container
+        UPLOAD_DIR = "static/uploads" # Relative to CWD (works for local & docker)
         os.makedirs(UPLOAD_DIR, exist_ok=True)
         
         # Generate unique filename

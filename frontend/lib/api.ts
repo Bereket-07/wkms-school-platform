@@ -23,6 +23,22 @@ api.interceptors.request.use(
     }
 );
 
+// Add a response interceptor to handle expired tokens
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+            // Only redirect if we are in a browser context and not already on the login page
+            if (typeof window !== 'undefined' && !window.location.pathname.includes('/admin/login')) {
+                console.warn('Authentication error (401/403). Redirecting to login.');
+                localStorage.removeItem('token');
+                window.location.href = '/admin/login';
+            }
+        }
+        return Promise.reject(error);
+    }
+);
+
 export interface Campaign {
     id: string;
     title: string;
@@ -80,10 +96,16 @@ export const getMedia = async (skip = 0, limit = 100, type?: string): Promise<Me
     return response.data;
 };
 
-export const getDonations = async (skip = 0, limit = 100, campaignId?: string): Promise<Donation[]> => {
+export const getDonations = async (skip = 0, limit = 100, campaignId?: string, startDate?: string, endDate?: string): Promise<Donation[]> => {
     let url = `/donate/?skip=${skip}&limit=${limit}`;
     if (campaignId) {
         url += `&campaign_id=${campaignId}`;
+    }
+    if (startDate) {
+        url += `&start_date=${startDate}`;
+    }
+    if (endDate) {
+        url += `&end_date=${endDate}`;
     }
     const response = await api.get(url);
     return response.data;
@@ -158,38 +180,41 @@ export const uploadFile = async (file: File): Promise<{ url: string }> => {
     const formData = new FormData();
     formData.append('file', file);
 
-    // Get Base URL directly to debug
     let baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
 
-    // Ensure baseUrl doesn't end with a slash
     if (baseUrl.endsWith('/')) {
         baseUrl = baseUrl.slice(0, -1);
-    }
-
-    // Ensure baseUrl includes /api/v1 if not present (heuristic)
-    if (!baseUrl.includes('/api/v1')) {
-        console.warn('Base URL might be missing /api/v1 prefix:', baseUrl);
-        // We can append it if we are sure, but let's just log for now to debug.
     }
 
     const uploadUrl = `${baseUrl}/media/upload`;
     console.log('Attempting upload to:', uploadUrl);
 
     try {
-        const response = await api.post('/media/upload', formData, {
+        const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
+        
+        const response = await fetch(uploadUrl, {
+            method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data',
+                // Do NOT set Content-Type manually, the browser will set it with the correct boundary
+                ...(token ? { 'Authorization': `Bearer ${token}` } : {})
             },
+            body: formData,
         });
-        return response.data;
+
+        if (!response.ok) {
+            if (response.status === 401 || response.status === 403) {
+                if (typeof window !== 'undefined' && !window.location.pathname.includes('/admin/login')) {
+                    console.warn('Authentication error (401/403) from fetch. Redirecting to login.');
+                    localStorage.removeItem('token');
+                    window.location.href = '/admin/login';
+                }
+            }
+            throw new Error(`Upload failed with status ${response.status}`);
+        }
+
+        return await response.json();
     } catch (error: any) {
         console.error('Upload failed:', error);
-        if (error.response) {
-            console.error('Error Status:', error.response.status);
-            console.error('Error Data:', error.response.data);
-            console.error('Requested URL:', error.config?.url);
-            console.error('Base URL used by Axios:', error.config?.baseURL);
-        }
         throw error;
     }
 };

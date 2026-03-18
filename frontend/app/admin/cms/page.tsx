@@ -78,7 +78,7 @@ export default function CMSPage() {
         }
     };
 
-    const sections = ["HERO", "ABOUT", "IMPACT", "MEDIA", "VIDEOS", "COMMUNITY", "FOOTER"];
+    const sections = ["BRANDING", "HERO", "ABOUT", "IMPACT", "MEDIA", "VIDEOS", "COMMUNITY", "FOOTER"];
     const allTabs = sections;
 
     if (loading) return <div className="flex h-96 items-center justify-center"><Loader2 className="animate-spin w-8 h-8 text-emerald-600" /></div>;
@@ -164,6 +164,137 @@ export default function CMSPage() {
                             transition={{ duration: 0.2 }}
                             className="space-y-8"
                         >
+                            {/* --- VISUAL EDITOR: BRANDING SECTION --- */}
+                            {activeTab === 'BRANDING' && (
+                                <div className="space-y-8">
+                                    <div className="bg-slate-50 rounded-[2rem] p-8 border border-slate-200">
+                                        <div className="mb-6">
+                                            <h3 className="text-xl font-bold text-slate-900 border-b pb-2">Global Branding & Logo</h3>
+                                            <p className="text-sm text-slate-500 mt-2">Manage your core logo and brand assets.</p>
+                                        </div>
+                                        
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                                            {/* Logo Upload */}
+                                            <div className="space-y-4">
+                                                <label className="text-xs font-bold text-slate-500 uppercase tracking-widest">Main Site Logo</label>
+                                                <div className="relative aspect-[3/1] bg-slate-100 rounded-2xl overflow-hidden group border-2 border-dashed border-slate-300 flex items-center justify-center p-4">
+                                                    {formState['logo_main'] ? (
+                                                        <img src={formState['logo_main']} alt="Site Logo" className="max-w-full max-h-full object-contain" />
+                                                    ) : (
+                                                        <div className="text-slate-400 flex flex-col items-center">
+                                                            <ImageIcon className="w-8 h-8 mb-2" />
+                                                            <span className="text-sm font-medium">No logo uploaded</span>
+                                                        </div>
+                                                    )}
+                                                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 backdrop-blur-sm">
+                                                        <label className="cursor-pointer bg-white text-slate-900 px-4 py-2 rounded-full font-bold flex items-center gap-2 hover:scale-105 transition shadow-lg">
+                                                            <Upload className="w-4 h-4" /> Upload New Logo
+                                                            <input type="file" className="hidden" accept="image/*" onChange={(e) => e.target.files?.[0] && handleFileUpload('logo_main', e.target.files[0])} />
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <p className="text-xs text-slate-500">Recommended: High-res transparent PNG or SVG.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Social Links Section */}
+                                    <div className="bg-slate-50 rounded-[2rem] p-8 border border-slate-200">
+                                        <div className="mb-6">
+                                            <h3 className="text-xl font-bold text-slate-900 border-b pb-2">Social Media Global Links</h3>
+                                            <p className="text-sm text-slate-500 mt-2">Update the social links used in the website footer. Leave blank to hide a platform.</p>
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                            {/* Facebook */}
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="w-2 h-2 rounded-full bg-[#1877F2]"></span> Facebook URL
+                                                </label>
+                                                <input
+                                                    value={formState['social_facebook'] || ''}
+                                                    onChange={(e) => handleInputChange('social_facebook', e.target.value)}
+                                                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:outline-none focus:border-emerald-500 transition-all text-slate-700"
+                                                    placeholder="https://facebook.com/yourpage"
+                                                />
+                                            </div>
+                                            {/* Instagram */}
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="w-2 h-2 rounded-full bg-[#E4405F]"></span> Instagram URL
+                                                </label>
+                                                <input
+                                                    value={formState['social_instagram'] || ''}
+                                                    onChange={(e) => handleInputChange('social_instagram', e.target.value)}
+                                                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:outline-none focus:border-emerald-500 transition-all text-slate-700"
+                                                    placeholder="https://instagram.com/yourprofile"
+                                                />
+                                            </div>
+                                            {/* YouTube */}
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="w-2 h-2 rounded-full bg-[#FF0000]"></span> YouTube URL
+                                                </label>
+                                                <input
+                                                    value={formState['social_youtube'] || ''}
+                                                    onChange={(e) => handleInputChange('social_youtube', e.target.value)}
+                                                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:outline-none focus:border-emerald-500 transition-all text-slate-700"
+                                                    placeholder="https://youtube.com/@yourchannel"
+                                                />
+                                            </div>
+                                            {/* TikTok */}
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="w-2 h-2 rounded-full bg-black"></span> TikTok URL
+                                                </label>
+                                                <input
+                                                    value={formState['social_tiktok'] || ''}
+                                                    onChange={(e) => handleInputChange('social_tiktok', e.target.value)}
+                                                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:outline-none focus:border-emerald-500 transition-all text-slate-700"
+                                                    placeholder="https://tiktok.com/@yourprofile"
+                                                />
+                                            </div>
+                                            {/* WhatsApp */}
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="w-2 h-2 rounded-full bg-[#25D366]"></span> WhatsApp URL/Number
+                                                </label>
+                                                <input
+                                                    value={formState['social_whatsapp'] || ''}
+                                                    onChange={(e) => handleInputChange('social_whatsapp', e.target.value)}
+                                                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:outline-none focus:border-emerald-500 transition-all text-slate-700"
+                                                    placeholder="https://wa.me/1234567890"
+                                                />
+                                            </div>
+                                            {/* LinkedIn */}
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="w-2 h-2 rounded-full bg-[#0A66C2]"></span> LinkedIn URL
+                                                </label>
+                                                <input
+                                                    value={formState['social_linkedin'] || ''}
+                                                    onChange={(e) => handleInputChange('social_linkedin', e.target.value)}
+                                                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:outline-none focus:border-emerald-500 transition-all text-slate-700"
+                                                    placeholder="https://linkedin.com/company/yours"
+                                                />
+                                            </div>
+                                            {/* X/Twitter */}
+                                            <div className="space-y-1">
+                                                <label className="text-xs font-bold text-slate-600 uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="w-2 h-2 rounded-full bg-slate-800"></span> X (Twitter) URL
+                                                </label>
+                                                <input
+                                                    value={formState['social_twitter'] || ''}
+                                                    onChange={(e) => handleInputChange('social_twitter', e.target.value)}
+                                                    className="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 focus:outline-none focus:border-emerald-500 transition-all text-slate-700"
+                                                    placeholder="https://x.com/yourhandle"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                             {/* --- VISUAL EDITOR: HERO SECTION --- */}
                             {activeTab === 'HERO' && (
                                 <div className="space-y-6">
@@ -516,7 +647,7 @@ export default function CMSPage() {
                             )}
 
                             {/* --- FALLBACK FOR OTHER TABS --- */}
-                            {allTabs.includes(activeTab) && !['HERO', 'ABOUT', 'IMPACT', 'MEDIA', 'COMMUNITY', 'FOOTER'].includes(activeTab) && (
+                            {allTabs.includes(activeTab) && !['BRANDING', 'HERO', 'ABOUT', 'IMPACT', 'MEDIA', 'VIDEOS', 'COMMUNITY', 'FOOTER'].includes(activeTab) && (
                                 <div className="p-8 text-center text-slate-400">
                                     Select a section to edit.
                                 </div>

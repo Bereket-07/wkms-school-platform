@@ -16,11 +16,14 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 from sqlalchemy.orm import joinedload
 
+from datetime import datetime
+
 @router.get("/", response_model=List[Donation])
 def read_donations(
     skip: int = 0,
     limit: int = 100,
-    campaign_id: str | None = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
     db: Session = Depends(deps.get_db),
     # current_user = Depends(deps.get_current_active_user) # Uncomment to secure
 ):
@@ -35,6 +38,22 @@ def read_donations(
         else:
             query = query.filter(DonationModel.campaign_id == campaign_id)
             
+    try:
+        from datetime import datetime, timedelta, timezone
+        
+        if start_date:
+            target_start = datetime.strptime(start_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            query = query.filter(DonationModel.created_at >= target_start)
+            
+        if end_date:
+            target_end = datetime.strptime(end_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+            # Include the entire end_date by going to the next day at 00:00:00
+            target_end_next_day = target_end + timedelta(days=1)
+            query = query.filter(DonationModel.created_at < target_end_next_day)
+            
+    except ValueError:
+        pass
+
     donations = query.order_by(DonationModel.created_at.desc()).offset(skip).limit(limit).all()
     return donations
 

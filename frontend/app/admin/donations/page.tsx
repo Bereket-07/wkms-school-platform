@@ -9,13 +9,15 @@ export default function DonationsPage() {
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedCampaign, setSelectedCampaign] = useState<string>("");
+    const [startDate, setStartDate] = useState<string>("");
+    const [endDate, setEndDate] = useState<string>("");
 
     useEffect(() => {
         async function fetchData() {
             setLoading(true);
             try {
                 const [donationsData, campaignsData] = await Promise.all([
-                    getDonations(0, 100, selectedCampaign || undefined),
+                    getDonations(0, 100, selectedCampaign || undefined, startDate || undefined, endDate || undefined),
                     getCampaigns()
                 ]);
                 setDonations(donationsData);
@@ -29,7 +31,7 @@ export default function DonationsPage() {
             }
         }
         fetchData();
-    }, [selectedCampaign]);
+    }, [selectedCampaign, startDate, endDate]);
 
     if (loading) {
         return <div className="p-12 text-center text-slate-400">Loading donation history...</div>;
@@ -60,6 +62,50 @@ export default function DonationsPage() {
                                 ))}
                             </optgroup>
                         </select>
+                    </div>
+
+                    {/* Date Interval Picker */}
+                    <div className="flex bg-white border border-slate-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-emerald-500 shadow-sm">
+
+                        {/* Start Date */}
+                        <div className="relative flex-1 border-r border-slate-100 flex items-center">
+                            <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                            <input
+                                type="date"
+                                value={startDate}
+                                onChange={(e) => setStartDate(e.target.value)}
+                                className="pl-9 pr-2 py-2 text-sm appearance-none outline-none w-full text-slate-700 bg-transparent min-w-[130px]"
+                                placeholder="From"
+                                title="Start Date"
+                            />
+                        </div>
+
+                        {/* End Date */}
+                        <div className="relative flex-1 flex items-center bg-slate-50/50">
+                            <span className="text-slate-400 text-xs px-2 font-medium">To</span>
+                            <input
+                                type="date"
+                                value={endDate}
+                                onChange={(e) => setEndDate(e.target.value)}
+                                className="pl-2 pr-2 py-2 text-sm appearance-none outline-none w-full text-slate-700 bg-transparent min-w-[130px]"
+                                placeholder="To"
+                                title="End Date"
+                            />
+                        </div>
+
+                        {/* Clear Button */}
+                        {(startDate || endDate) && (
+                            <button
+                                onClick={() => {
+                                    setStartDate("");
+                                    setEndDate("");
+                                }}
+                                className="px-3 flex items-center justify-center text-slate-400 hover:text-rose-500 hover:bg-rose-50 border-l border-slate-100 transition-colors"
+                                title="Clear date filter"
+                            >
+                                <XCircle className="w-4 h-4" />
+                            </button>
+                        )}
                     </div>
 
                     <div className="flex gap-4">

@@ -1,13 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Menu, X, Heart } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { getSiteContent } from "@/lib/api";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [logoUrl, setLogoUrl] = useState("/wkmslogo.svg");
     const pathname = usePathname();
 
     // Handle scroll effect
@@ -16,6 +19,21 @@ export default function Navbar() {
             setScrolled(window.scrollY > 20);
         };
         window.addEventListener("scroll", handleScroll);
+
+        // Fetch global branding content
+        const fetchContent = async () => {
+            try {
+                const data = await getSiteContent();
+                const mainLogo = data.find(c => c.key === 'logo_main');
+                if (mainLogo && mainLogo.content) {
+                    setLogoUrl(mainLogo.content);
+                }
+            } catch (err) {
+                console.error("Failed to load branding content", err);
+            }
+        };
+        fetchContent();
+
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -44,7 +62,7 @@ export default function Navbar() {
     if (pathname?.startsWith('/admin')) return null;
 
     const navLinks = [
-        { name: "About", href: "/#about" },
+        { name: "About Us", href: "/#about" },
         { name: "Community", href: "/#community" },
         { name: "Our Impact", href: "/#impact" },
         { name: "Gallery", href: "/#media" },
@@ -53,35 +71,31 @@ export default function Navbar() {
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isOpen
-                    ? "bg-white py-4" // Solid white when open
-                    : scrolled
-                        ? "bg-white/90 backdrop-blur-md shadow-sm py-4"
-                        : "bg-transparent py-6"
+                ? "bg-white py-4" // Solid white when open
+                : scrolled
+                    ? "bg-white/90 backdrop-blur-md shadow-sm py-4"
+                    : "bg-transparent py-6"
                 }`}
         >
             <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3 group" onClick={handleLinkClick}>
-                    <div className="w-10 h-10 bg-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                        W
-                    </div>
-                    <div className={`flex flex-col transition-colors ${scrolled || isOpen ? 'text-slate-900' : 'text-slate-900'}`}>
-                        <span className="font-black text-xl leading-none tracking-wide text-emerald-600 font-lato">
-                            WKMS
-                        </span>
-                        <span className="font-medium text-[0.65rem] md:text-xs text-slate-600 leading-tight tracking-wide uppercase">
-                            Wakero Keleboro Memorial School
-                        </span>
+                    <div className="relative w-16 md:w-20 h-auto flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
+                        <img
+                            src={logoUrl}
+                            alt="WKMS Logo"
+                            className="w-full h-full object-contain"
+                        />
                     </div>
                 </Link>
 
                 {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center gap-8">
+                <div className="hidden md:flex items-center gap-6 lg:gap-10">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className={`font-medium text-sm hover:text-emerald-500 transition-colors ${scrolled ? "text-slate-600" : "text-slate-800 hover:text-emerald-600"
+                            className={`font-medium text-[16px] hover:text-brand-red transition-colors ${scrolled ? "text-slate-700" : "text-white/90 hover:text-white"
                                 }`}
                         >
                             {link.name}
@@ -90,9 +104,9 @@ export default function Navbar() {
 
                     <Link
                         href="/donate"
-                        className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2.5 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-emerald-500/30 flex items-center gap-2 transform hover:-translate-y-0.5"
+                        className="bg-brand-red hover:bg-[#d4151a] text-white px-6 py-2.5 rounded-md font-medium text-[17px] transition-all flex items-center gap-2 ml-4"
                     >
-                        Donate Now
+                        Donate Now <Heart className="w-4 h-4 fill-current text-white" />
                     </Link>
                 </div>
 
@@ -105,7 +119,7 @@ export default function Navbar() {
                     {isOpen ? (
                         <X className="w-6 h-6 text-slate-900" />
                     ) : (
-                        <Menu className={`w-6 h-6 ${scrolled ? 'text-slate-900' : 'text-slate-900'}`} />
+                        <Menu className={`w-6 h-6 ${scrolled ? 'text-slate-900' : 'text-white/90'}`} />
                     )}
                 </button>
 
@@ -119,7 +133,7 @@ export default function Navbar() {
                             key={link.name}
                             href={link.href}
                             onClick={handleLinkClick}
-                            className="text-2xl font-medium text-slate-800 hover:text-emerald-600 transition-colors"
+                            className="text-2xl font-bold text-brand-dark hover:text-brand-red transition-colors"
                         >
                             {link.name}
                         </Link>
@@ -127,7 +141,7 @@ export default function Navbar() {
                     <Link
                         href="/donate"
                         onClick={handleLinkClick}
-                        className="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl hover:bg-emerald-700 transition-all flex items-center gap-2"
+                        className="bg-brand-red text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl hover:bg-red-700 transition-all flex items-center gap-2"
                     >
                         Donate Now <Heart className="w-5 h-5 fill-current" />
                     </Link>
