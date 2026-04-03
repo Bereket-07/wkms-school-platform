@@ -117,7 +117,8 @@ async def verify_chapa_payment(
 @router.post("/webhook")
 async def chapa_webhook(
     request: Request,
-    x_chapa_signature: str | None = Header(None),
+    chapa_signature: str | None = Header(None, alias="Chapa-Signature"),
+    x_chapa_signature: str | None = Header(None, alias="x-chapa-signature"),
     db: Session = Depends(deps.get_db)
 ):
     """
@@ -134,7 +135,10 @@ async def chapa_webhook(
             hashlib.sha256
         ).hexdigest()
         
-        if x_chapa_signature != expected_signature:
+        # Chapa usually sends 'Chapa-Signature' locally, but sometimes x-chapa-signature
+        actual_signature = chapa_signature or x_chapa_signature
+        
+        if actual_signature != expected_signature:
             raise HTTPException(status_code=403, detail="Invalid signature")
             
     # 2. Parse Event

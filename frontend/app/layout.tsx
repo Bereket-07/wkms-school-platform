@@ -1,17 +1,36 @@
 import type { Metadata } from "next";
-import { Merriweather, Montserrat } from "next/font/google";
+import { Merriweather } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const merriweather = Merriweather({
-  subsets: ["latin"],
-  weight: ["300", "400", "700"],
-  variable: "--font-merriweather",
+const montserrat = localFont({
+  src: [
+    { path: "../font/Montserrat-Thin.otf", weight: "100", style: "normal" },
+    { path: "../font/Montserrat-ExtraLight.otf", weight: "200", style: "normal" },
+    { path: "../font/Montserrat-Light.otf", weight: "300", style: "normal" },
+    { path: "../font/Montserrat-Regular.otf", weight: "400", style: "normal" },
+    { path: "../font/Montserrat-Medium.otf", weight: "500", style: "normal" },
+    { path: "../font/Montserrat-SemiBold.otf", weight: "600", style: "normal" },
+    { path: "../font/Montserrat-Bold.otf", weight: "700", style: "normal" },
+    { path: "../font/Montserrat-ExtraBold.otf", weight: "800", style: "normal" },
+    { path: "../font/Montserrat-Black.otf", weight: "900", style: "normal" },
+  ],
+  variable: "--font-montserrat",
 });
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-montserrat",
+const montserratAlt = localFont({
+  src: [
+    { path: "../font/MontserratAlternates-Thin.otf", weight: "100", style: "normal" },
+    { path: "../font/MontserratAlternates-ExtraLight.otf", weight: "200", style: "normal" },
+    { path: "../font/MontserratAlternates-Light.otf", weight: "300", style: "normal" },
+    { path: "../font/MontserratAlternates-Regular.otf", weight: "400", style: "normal" },
+    { path: "../font/MontserratAlternates-Medium.otf", weight: "500", style: "normal" },
+    { path: "../font/MontserratAlternates-SemiBold.otf", weight: "600", style: "normal" },
+    { path: "../font/MontserratAlternates-Bold.otf", weight: "700", style: "normal" },
+    { path: "../font/MontserratAlternates-ExtraBold.otf", weight: "800", style: "normal" },
+    { path: "../font/MontserratAlternates-Black.otf", weight: "900", style: "normal" },
+  ],
+  variable: "--font-montserrat-alt",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} ${merriweather.variable} font-sans bg-gray-50 text-emerald-900`}>
+      <body className={`${montserrat.variable} ${montserratAlt.variable} font-sans bg-gray-50 text-emerald-900`}>
         <Navbar />
         {children}
       </body>

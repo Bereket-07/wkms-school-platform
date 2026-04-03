@@ -22,6 +22,7 @@ from datetime import datetime
 def read_donations(
     skip: int = 0,
     limit: int = 100,
+    campaign_id: str | None = None,
     start_date: str | None = None,
     end_date: str | None = None,
     db: Session = Depends(deps.get_db),

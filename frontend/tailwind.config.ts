@@ -15,7 +15,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-montserrat)', 'sans-serif'],
-        serif: ['var(--font-merriweather)', 'serif'],
+        serif: ['var(--font-montserrat-alt)', 'sans-serif'],
         lato: ['var(--font-montserrat)', 'sans-serif'],
       },
       backgroundImage: {
