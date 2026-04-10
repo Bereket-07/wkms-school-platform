@@ -161,8 +161,9 @@ export interface SiteContent {
 }
 
 export const getSiteContent = async (section?: string): Promise<SiteContent[]> => {
-    const url = section ? `/site-content/?section=${section}` : '/site-content/';
-    const response = await api.get(url);
+    const ts = new Date().getTime();
+    const url = section ? `/site-content/?section=${section}&_t=${ts}` : `/site-content/?_t=${ts}`;
+    const response = await api.get(url, { headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache' } });
     return response.data;
 };
 
