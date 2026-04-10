@@ -82,15 +82,14 @@ export default function Home() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="inline-flex items-center bg-[#004d49]/90 rounded-md px-6 py-2 mb-10 text-[15px] text-white/90 font-light tracking-wide shadow-sm backdrop-blur-sm">
-              Educating for tomorrow
+              {_t('hero_badge', 'Educating for tomorrow')}
             </div>
             <h1 className="font-sans font-bold text-white text-5xl md:text-7xl lg:text-[80px] leading-[1.1] tracking-tight mb-8 drop-shadow-2xl">
-              Connecting Education, <br className="hidden md:block" />
-              Opportunity & Impact.
+              {_t('hero_title_1', 'Connecting Education,')} <br className="hidden md:block" />
+              {_t('hero_title_accent', 'Opportunity & Impact.')}
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-12 font-normal leading-relaxed font-sans drop-shadow-md">
-              Providing quality education to 500+ students in rural Ethiopia. <br className="hidden md:block" />
-              We are the bridge between your generosity and their future.
+              {_t('hero_subtitle', 'Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center font-sans">
               <Link
@@ -176,17 +175,17 @@ export default function Home() {
             {/* Right Content */}
             <div className="order-1 lg:order-2">
               <div className="inline-block border-b-2 border-brand-dark pb-0.5 mb-10">
-                <span className="text-brand-dark font-bold text-[17px]">About Us</span>
+                <span className="text-brand-dark font-bold text-[17px]">{_t('about_badge', 'About Us')}</span>
               </div>
 
               <h2 className="text-6xl md:text-[85px] font-sans font-black text-brand-dark mb-10 leading-[1] tracking-tight">
-                More than <br className="hidden md:block" />
-                just <span className="text-brand-orange">a school</span>
+                {_t('about_title_1', 'More than just')} <br className="hidden md:block" />
+                <span className="text-brand-orange">{_t('about_title_accent', 'a school')}</span>
               </h2>
 
               <div className="space-y-6 text-lg md:text-[19px] text-slate-400 font-light leading-relaxed mb-16 max-w-xl">
-                <p>Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.</p>
-                <p>Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.</p>
+                <p>{_t('about_text_1', 'Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.')}</p>
+                <p>{_t('about_text_2', 'Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.')}</p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-8 sm:gap-14">
@@ -222,22 +221,22 @@ export default function Home() {
         <div className="container mx-auto max-w-[1100px]">
           <div className="text-center mb-16 flex flex-col items-center">
             <div className="inline-block border-b-[2px] border-brand-dark pb-0.5 mb-6">
-              <span className="text-brand-dark font-bold text-[16px]">Community</span>
+              <span className="text-brand-dark font-bold text-[16px]">{_t('community_badge', 'Community')}</span>
             </div>
-            <h2 className="text-5xl md:text-[75px] font-sans font-black text-brand-dark leading-[1] tracking-[-0.02em]">Understanding the need</h2>
+            <h2 className="text-5xl md:text-[75px] font-sans font-black text-brand-dark leading-[1] tracking-[-0.02em]">{_t('community_title', 'Understanding the need')}</h2>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-14 font-sans max-w-5xl mx-auto">
             <div className="bg-white p-10 md:p-12 lg:p-14 rounded-[20px] shadow-sm">
               <h3 className="text-[22px] font-black text-black mb-10 flex items-center gap-4 tracking-tight">
-                <span className="w-[4px] h-6 bg-brand-red"></span> The Challenge
+                <span className="w-[4px] h-6 bg-brand-red"></span> {_t('community_col1_title', 'The Challenge')}
               </h3>
               <ul className="space-y-8">
                 {[1, 2, 3].map((i) => (
                   <li key={i} className="flex gap-6 items-start">
                     <span className="w-7 h-7 rounded-full bg-brand-red flex items-center justify-center text-white font-medium text-xs shrink-0 mt-0.5">{i}</span>
                     <span className="text-slate-400 font-normal text-[16px] leading-relaxed max-w-sm">
-                      Lack of nearby schools forces children to walk long distances daily.
+                      {_t(`community_challenge_${i}`, 'Lack of nearby schools forces children to walk long distances daily.')}
                     </span>
                   </li>
                 ))}
@@ -246,7 +245,7 @@ export default function Home() {
 
             <div className="bg-brand-dark p-10 md:p-12 lg:p-14 rounded-[20px] shadow-2xl relative overflow-hidden">
               <h3 className="text-[22px] font-medium text-white mb-10 flex items-center gap-4 relative z-10 tracking-wide">
-                <span className="w-[4px] h-6 bg-brand-orange"></span> The WKMS Solution
+                <span className="w-[4px] h-6 bg-brand-orange"></span> {_t('community_col2_title', 'The WKMS Solution')}
               </h3>
               <ul className="space-y-8 relative z-10">
                 {[1, 2, 3].map((i) => (
@@ -255,7 +254,7 @@ export default function Home() {
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
                     </span>
                     <span className="text-white/80 font-normal text-[16px] leading-relaxed max-w-sm">
-                      <strong className="font-semibold text-white">Local Access:</strong> a safe, high quality school in the heart of the village.
+                      <strong className="font-semibold text-white">{_t(`community_solution_${i}_label`, 'Local Access: ')}</strong> {_t(`community_solution_${i}_text`, 'a safe, high quality school in the heart of the village.')}
                     </span>
                   </li>
                 ))}
