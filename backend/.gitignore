@@ -1,6 +1,5 @@
 .env/
 .venv/
 .env
-alembic/
 __pycache__/
 .venv/
