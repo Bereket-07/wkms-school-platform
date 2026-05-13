@@ -34,8 +34,49 @@ const montserratAlt = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "WKMS - Wakero Keleboro Memorial Pre-School",
-  description: "Connecting Education, Opportunity & Impact in rural Ethiopia.",
+  metadataBase: new URL("https://wakerokelborofoundation.org"),
+  title: {
+    default: "WKMS - Wakero Keleboro Memorial Pre-School",
+    template: "%s | Wakero Keleboro Foundation",
+  },
+  description: "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
+  keywords: ["Education in Ethiopia", "Wakero Keleboro Memorial Pre-School", "Rural School Ethiopia", "Charity for Education", "NGO Ethiopia", "Support Ethiopian Students", "Build Schools in Africa"],
+  authors: [{ name: "Wakero Keleboro Foundation" }],
+  creator: "Wakero Keleboro Foundation",
+  publisher: "Wakero Keleboro Foundation",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  openGraph: {
+    title: "WKMS - Wakero Keleboro Memorial Pre-School",
+    description: "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
+    url: "https://wakerokelborofoundation.org",
+    siteName: "Wakero Keleboro Foundation",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WKMS - Wakero Keleboro Memorial Pre-School",
+    description: "Connecting Education, Opportunity & Impact in rural Ethiopia.",
+    creator: "@wkmspre_school", // Replace with actual handle if applicable
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/favicon.ico', // Next.js automatically picks up favicon.ico from app/ or public/
+  },
 };
 
 import Navbar from "@/components/Navbar";
@@ -47,6 +88,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "NGO",
+              "name": "Wakero Keleboro Foundation",
+              "url": "https://wakerokelborofoundation.org",
+              "logo": "https://wakerokelborofoundation.org/favicon.ico",
+              "description": "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
+              "areaServed": {
+                "@type": "Country",
+                "name": "Ethiopia"
+              },
+              "knowsAbout": ["Education", "Pre-School", "Rural Development", "Charity"]
+            })
+          }}
+        />
+      </head>
       <body className={`${montserrat.variable} ${montserratAlt.variable} font-sans bg-gray-50 text-emerald-900`}>
         <Navbar />
         {children}

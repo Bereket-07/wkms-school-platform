@@ -7,3 +7,4 @@ from app.models.donation import Donation  # noqa
 from app.models.media import Media  # noqa
 from app.models.site_content import SiteContent  # noqa
 from app.models.contact import ContactMessage  # noqa
+from app.models.pledge import Pledge  # noqa

@@ -103,7 +103,7 @@ export default function Navbar() {
                     ))}
 
                     <Link
-                        href="/donate"
+                        href="/pledge"
                         className="bg-brand-red hover:bg-[#d4151a] text-white px-6 py-2.5 rounded-md font-medium text-[17px] transition-all flex items-center gap-2 ml-4"
                     >
                         Donate Now <Heart className="w-4 h-4 fill-current text-white" />
@@ -139,7 +139,7 @@ export default function Navbar() {
                         </Link>
                     ))}
                     <Link
-                        href="/donate"
+                        href="/pledge"
                         onClick={handleLinkClick}
                         className="bg-brand-red text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl hover:bg-red-700 transition-all flex items-center gap-2"
                     >

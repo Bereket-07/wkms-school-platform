@@ -17,3 +17,6 @@ api_router.include_router(site_content.router, prefix="/site-content", tags=["Si
 
 from app.api.v1.endpoints import contact
 api_router.include_router(contact.router, prefix="/contact", tags=["Contact"])
+
+from app.api.v1.endpoints import pledges
+api_router.include_router(pledges.router, prefix="/pledges", tags=["Pledges"])

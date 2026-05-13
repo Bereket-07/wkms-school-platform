@@ -29,6 +29,7 @@ export default function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
         { name: "Site Content", href: "/admin/cms", icon: Edit3 },
         { name: "Media Gallery", href: "/admin/gallery", icon: ImageIcon },
         { name: "Messages", href: "/admin/messages", icon: Mail },
+        { name: "Pledges", href: "/admin/pledges", icon: Heart },
         { name: "Donations", href: "/admin/donations", icon: Heart }, // Future placeholder
         // { name: "Settings", href: "/admin/settings", icon: Settings },
     ];

@@ -93,7 +93,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center font-sans">
               <Link
-                href="/donate"
+                href="/pledge"
                 className="bg-brand-red hover:bg-[#d4151a] text-white text-[17px] px-8 py-3.5 rounded-md font-medium transition-all duration-300 flex items-center gap-3 shadow-lg"
               >
                 Start donating <ArrowRight className="w-4 h-4" />
@@ -500,8 +500,8 @@ export default function Home() {
                 Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.
               </p>
               
-              <Link href="/donate" className="inline-flex items-center gap-2.5 bg-brand-red text-white text-[15px] px-8 py-3.5 rounded-md font-medium hover:bg-[#d4151a] shadow-lg transition-colors">
-                Make a donation <Heart className="w-4 h-4 fill-white text-white" />
+              <Link href="/pledge" className="inline-flex items-center gap-2.5 bg-brand-red text-white text-[15px] px-8 py-3.5 rounded-md font-medium hover:bg-[#d4151a] shadow-lg transition-colors">
+                Make a pledge <Heart className="w-4 h-4 fill-white text-white" />
               </Link>
             </div>
           </div>
