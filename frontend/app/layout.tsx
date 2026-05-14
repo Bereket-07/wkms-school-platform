@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/favicon.ico', // Next.js automatically picks up favicon.ico from app/ or public/
+    icon: '/wkmslogo.svg',
   },
 };
 
