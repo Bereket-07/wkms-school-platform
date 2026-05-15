@@ -1,16 +1,16 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Make a Pledge",
-  description: "Pledge your support to Wakero Keleboro Memorial Pre-School. Join us in providing quality education to rural Ethiopia.",
+  title: "Donate",
+  description: "Make a direct impact. Donate to Wakero Keleboro Memorial Pre-School and help us provide quality education in rural Ethiopia.",
   openGraph: {
-    title: "Make a Pledge | Wakero Keleboro Foundation",
-    description: "Pledge your support to Wakero Keleboro Memorial Pre-School. Join us in providing quality education to rural Ethiopia.",
-    url: "https://wakerokelborofoundation.org/pledge",
+    title: "Donate | Wakero Keleboro Foundation",
+    description: "Make a direct impact. Donate to Wakero Keleboro Memorial Pre-School and help us provide quality education in rural Ethiopia.",
+    url: "https://wakerokelborofoundation.org/donate",
   }
 };
 
-export default function PledgeLayout({
+export default function DonateLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -23,11 +23,11 @@ export default function PledgeLayout({
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "DonateAction",
-            "name": "Pledge to Wakero Keleboro Foundation",
-            "description": "Make a pledge to support the Wakero Keleboro Memorial Pre-School.",
+            "name": "Donate to Wakero Keleboro Foundation",
+            "description": "Donate to support the Wakero Keleboro Memorial Pre-School.",
             "target": {
               "@type": "EntryPoint",
-              "urlTemplate": "https://wakerokelborofoundation.org/pledge",
+              "urlTemplate": "https://wakerokelborofoundation.org/donate",
               "inLanguage": "en-US",
               "actionPlatform": [
                 "http://schema.org/DesktopWebPlatform",

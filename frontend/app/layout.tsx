@@ -56,12 +56,21 @@ export const metadata: Metadata = {
     siteName: "Wakero Keleboro Foundation",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Wakero Keleboro Memorial Pre-School Students",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "WKMS - Wakero Keleboro Memorial Pre-School",
     description: "Connecting Education, Opportunity & Impact in rural Ethiopia.",
     creator: "@wkmspre_school", // Replace with actual handle if applicable
+    images: ["/opengraph-image.png"],
   },
   robots: {
     index: true,
@@ -75,7 +84,12 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/wkmslogo.svg',
+    icon: [
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/wkmslogo.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/apple-icon.png',
+    shortcut: '/icon.png',
   },
 };
 
@@ -94,16 +108,35 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "NGO",
-              "name": "Wakero Keleboro Foundation",
-              "url": "https://wakerokelborofoundation.org",
-              "logo": "https://wakerokelborofoundation.org/favicon.ico",
-              "description": "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
-              "areaServed": {
-                "@type": "Country",
-                "name": "Ethiopia"
-              },
-              "knowsAbout": ["Education", "Pre-School", "Rural Development", "Charity"]
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": "https://wakerokelborofoundation.org/#website",
+                  "url": "https://wakerokelborofoundation.org/",
+                  "name": "Wakero Keleboro Foundation",
+                  "description": "Connecting Education, Opportunity & Impact in rural Ethiopia.",
+                  "publisher": {
+                    "@id": "https://wakerokelborofoundation.org/#organization"
+                  }
+                },
+                {
+                  "@type": ["NGO", "Organization"],
+                  "@id": "https://wakerokelborofoundation.org/#organization",
+                  "name": "Wakero Keleboro Foundation",
+                  "url": "https://wakerokelborofoundation.org/",
+                  "logo": {
+                    "@type": "ImageObject",
+                    "url": "https://wakerokelborofoundation.org/icon.png"
+                  },
+                  "image": "https://wakerokelborofoundation.org/opengraph-image.png",
+                  "description": "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
+                  "areaServed": {
+                    "@type": "Country",
+                    "name": "Ethiopia"
+                  },
+                  "knowsAbout": ["Education", "Pre-School", "Rural Development", "Charity"]
+                }
+              ]
             })
           }}
         />
