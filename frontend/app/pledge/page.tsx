@@ -21,7 +21,17 @@ function PledgeForm() {
     const [error, setError] = useState("");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        
+        // Validation: Only allow letters and spaces for donor name
+        if (name === "donor_name") {
+            const regex = /^[a-zA-Z\s]*$/;
+            if (!regex.test(value)) {
+                return; // Ignore invalid input
+            }
+        }
+        
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {

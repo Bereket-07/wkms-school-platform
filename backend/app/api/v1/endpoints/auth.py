@@ -9,6 +9,8 @@ from app.core.config import settings
 from app.db.session import get_db
 from app.models.user import User
 
+from app.api import deps
+
 router = APIRouter()
 
 @router.get("/login")
@@ -59,31 +61,45 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
     if not email:
         raise HTTPException(status_code=400, detail="Google authentication failed: No email provided.")
 
-    # 3. Verify Whitelist
-    print(f"DEBUG AUTH: Received email from Google: '{email}'")
-    print(f"DEBUG AUTH: Authorized emails list: {settings.AUTHORIZED_EMAILS}")
+    # 3. Check DB first
+    user = db.query(User).filter(User.email == email).first()
 
-    if email.lower() not in [e.lower() for e in settings.AUTHORIZED_EMAILS]:
+    # 4. Verify Whitelist or DB presence
+    is_authorized = False
+    is_super = email in settings.SUPER_ADMIN_EMAILS
+
+    if user and user.is_active:
+        is_authorized = True
+    elif email.lower() in [e.lower() for e in settings.AUTHORIZED_EMAILS]:
+        is_authorized = True
+    elif is_super:
+        is_authorized = True
+
+    if not is_authorized:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN, 
-            detail=f"Access Denied: '{email}' is not authorized. Allowed: {len(settings.AUTHORIZED_EMAILS)} users."
+            detail=f"Access Denied: '{email}' is not authorized."
         )
 
-    # 4. Create or Update User in DB
-    user = db.query(User).filter(User.email == email).first()
+    # 5. Create or Update User in DB
     if not user:
         user = User(
             email=email,
             full_name=profile.get("name"),
-            hashed_password="oauth_user_no_password", # Placeholder
+            hashed_password="oauth_user_no_password",
             is_active=True,
-            is_superuser=(email in settings.SUPER_ADMIN_EMAILS)
+            is_superuser=is_super
         )
         db.add(user)
         db.commit()
         db.refresh(user)
+    else:
+        # Update superuser status just in case env changed
+        if is_super and not user.is_superuser:
+            user.is_superuser = True
+            db.commit()
 
-    # 5. Create Session JWT
+    # 6. Create Session JWT
     access_token_expires = timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
     token = security.create_access_token(
         user.id, expires_delta=access_token_expires
@@ -92,3 +108,18 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
     # Redirect to Frontend with Token
     frontend_url = f"{settings.FRONTEND_URL}/auth/callback"
     return RedirectResponse(f"{frontend_url}?token={token}")
+
+@router.get("/me")
+def read_users_me(
+    current_user: User = Depends(deps.get_current_active_user),
+) -> Any:
+    """
+    Get current user.
+    """
+    return {
+        "id": current_user.id,
+        "email": current_user.email,
+        "full_name": current_user.full_name,
+        "is_superuser": current_user.is_superuser,
+        "is_active": current_user.is_active,
+    }

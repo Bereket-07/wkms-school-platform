@@ -15,6 +15,8 @@ export default function AdminLayoutClient({
     const router = useRouter(); // Import needed
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [isSuperUser, setIsSuperUser] = useState(false);
+    const [userInitial, setUserInitial] = useState("A");
     const isLoginPage = pathname === "/admin/login";
 
     useEffect(() => {
@@ -27,7 +29,25 @@ export default function AdminLayoutClient({
         if (!token) {
             router.push('/admin/login');
         } else {
-            setIsLoading(false);
+            // Fetch user profile
+            fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/auth/me`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.is_superuser !== undefined) {
+                    setIsSuperUser(data.is_superuser);
+                    if (data.full_name) {
+                        setUserInitial(data.full_name.charAt(0).toUpperCase());
+                    } else if (data.email) {
+                        setUserInitial(data.email.charAt(0).toUpperCase());
+                    }
+                }
+            })
+            .catch(err => console.error("Failed to fetch user profile", err))
+            .finally(() => setIsLoading(false));
         }
     }, [pathname, isLoginPage, router]);
 
@@ -58,7 +78,7 @@ export default function AdminLayoutClient({
                 lg:static lg:translate-x-0
                 ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"}
             `}>
-                <AdminSidebar onCloseMobile={() => setIsMobileMenuOpen(false)} />
+                <AdminSidebar onCloseMobile={() => setIsMobileMenuOpen(false)} isSuperUser={isSuperUser} />
             </div>
 
             {/* Main Content Area */}
@@ -89,8 +109,8 @@ export default function AdminLayoutClient({
                                 Admin
                             </h2>
                         </div>
-                        <div className="w-8 h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-dark font-bold text-xs ring-2 ring-white ring-offset-2 ring-offset-slate-50">
-                            A
+                        <div className="w-8 h-8 rounded-full bg-brand-light flex items-center justify-center text-brand-dark font-bold text-xs ring-2 ring-white ring-offset-2 ring-offset-slate-50 uppercase">
+                            {userInitial}
                         </div>
                     </div>
                 </header>

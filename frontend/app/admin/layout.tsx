@@ -3,7 +3,7 @@ import AdminLayoutClient from "./AdminLayoutClient";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
-  description: "Administrative dashboard for the Wakero Keleboro Memorial Pre-School platform.",
+  description: "Administrative dashboard for the Wakero Keleboro Memorial Primary and middle school platform.",
   robots: {
     index: false,
     follow: false,

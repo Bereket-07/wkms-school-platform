@@ -20,3 +20,6 @@ api_router.include_router(contact.router, prefix="/contact", tags=["Contact"])
 
 from app.api.v1.endpoints import pledges
 api_router.include_router(pledges.router, prefix="/pledges", tags=["Pledges"])
+
+from app.api.v1.endpoints import users
+api_router.include_router(users.router, prefix="/users", tags=["Users"])

@@ -13,14 +13,16 @@ import {
     Edit3,
     X,
     Mail,
+    Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AdminSidebarProps {
     onCloseMobile?: () => void;
+    isSuperUser?: boolean;
 }
 
-export default function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
+export default function AdminSidebar({ onCloseMobile, isSuperUser = false }: AdminSidebarProps) {
     const pathname = usePathname();
 
     const links = [
@@ -31,7 +33,7 @@ export default function AdminSidebar({ onCloseMobile }: AdminSidebarProps) {
         { name: "Messages", href: "/admin/messages", icon: Mail },
         { name: "Pledges", href: "/admin/pledges", icon: Heart },
         { name: "Donations", href: "/admin/donations", icon: Heart }, // Future placeholder
-        // { name: "Settings", href: "/admin/settings", icon: Settings },
+        ...(isSuperUser ? [{ name: "Users", href: "/admin/users", icon: Users }] : []),
     ];
 
     return (
