@@ -83,10 +83,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: '/wkmslogo.png',
-    apple: '/wkmslogo.png',
-  },
 };
 
 import Navbar from "@/components/Navbar";
