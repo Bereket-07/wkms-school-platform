@@ -66,7 +66,9 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
 
     # 4. Verify Whitelist or DB presence
     is_authorized = False
-    is_super = email in settings.SUPER_ADMIN_EMAILS
+    
+    # Case insensitive email check for super admins
+    is_super = email.lower() in [e.lower() for e in settings.SUPER_ADMIN_EMAILS]
 
     if user and user.is_active:
         is_authorized = True
