@@ -29,8 +29,20 @@ export default function AdminLayoutClient({
         if (!token) {
             router.push('/admin/login');
         } else {
-            // Fetch user profile
-            fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/auth/me`, {
+            // Bulletproof API URL resolution
+            let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+            if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && apiUrl.includes('localhost')) {
+                // If we are in production but the env var failed to inject, force the production API path
+                apiUrl = '/api/v1';
+            } else if (!apiUrl.endsWith('/api/v1') && !apiUrl.endsWith('/api/v1/')) {
+                // Ensure it ends with /api/v1 if it doesn't already
+                apiUrl = apiUrl.replace(/\/$/, '') + '/api/v1';
+            }
+            
+            // Clean up any double slashes before auth/me
+            const fetchUrl = `${apiUrl}/auth/me`.replace(/([^:]\/)\/+/g, "$1");
+
+            fetch(fetchUrl, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

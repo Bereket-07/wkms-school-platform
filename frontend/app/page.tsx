@@ -601,31 +601,9 @@ export default function Home() {
 }
 
 function VideoPlayer({ src, poster }: { src: string, poster?: string }) {
-  const [isPlaying, setIsPlaying] = useState(false);
   const [hasInitialLoad, setHasInitialLoad] = useState(false);
   const [isBuffering, setIsBuffering] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsPlaying(true);
-          videoRef.current?.play().catch(() => { });
-        } else {
-          setIsPlaying(false);
-          videoRef.current?.pause();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [src]);
 
   return (
     <div className="relative w-full h-full bg-black flex items-center justify-center">
