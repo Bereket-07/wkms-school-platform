@@ -23,24 +23,32 @@ try:
 except Exception as e:
     print(f"Error checking/adding column: {e}")
 
-print("Updating existing users to super_admin status if they are in .env...")
+print("Updating users to match .env super_admin status...")
 try:
     # Get all users
     users = db.query(User).all()
     super_emails = [e.lower() for e in settings.SUPER_ADMIN_EMAILS]
     
-    updated_count = 0
+    upgraded_count = 0
+    demoted_count = 0
+    
     for u in users:
-        if u.email.lower() in super_emails and not u.is_superuser:
+        is_in_env = u.email.lower() in super_emails
+        
+        if is_in_env and not u.is_superuser:
             u.is_superuser = True
-            updated_count += 1
+            upgraded_count += 1
             print(f"Upgraded {u.email} to Super Admin!")
+        elif not is_in_env and u.is_superuser:
+            u.is_superuser = False
+            demoted_count += 1
+            print(f"Demoted {u.email} from Super Admin!")
             
-    if updated_count > 0:
+    if upgraded_count > 0 or demoted_count > 0:
         db.commit()
-        print(f"Successfully upgraded {updated_count} users to Super Admin!")
+        print(f"Successfully upgraded {upgraded_count} and demoted {demoted_count} users!")
     else:
-        print("No users needed to be upgraded (either none exist, or they are already upgraded).")
+        print("All users are perfectly synced with .env! No changes needed.")
 except Exception as e:
     print(f"Error updating users: {e}")
 finally:
