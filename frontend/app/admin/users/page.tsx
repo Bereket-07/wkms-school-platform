@@ -24,11 +24,21 @@ export default function UsersPage() {
         fetchUsers();
     }, []);
 
+    const getApiUrl = (endpoint: string) => {
+        let apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+        if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && apiUrl.includes('localhost')) {
+            apiUrl = '/api/v1';
+        } else if (!apiUrl.endsWith('/api/v1') && !apiUrl.endsWith('/api/v1/')) {
+            apiUrl = apiUrl.replace(/\/$/, '') + '/api/v1';
+        }
+        return `${apiUrl}${endpoint}`.replace(/([^:]\/)\/+/g, "$1");
+    };
+
     const fetchUsers = async () => {
         setIsLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/users/`, {
+            const res = await fetch(getApiUrl('/users/'), {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!res.ok) throw new Error("Failed to fetch users");
@@ -46,7 +56,7 @@ export default function UsersPage() {
         setIsCreating(true);
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/users/`, {
+            const res = await fetch(getApiUrl('/users/'), {
                 method: "POST",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -80,7 +90,7 @@ export default function UsersPage() {
         
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/users/${id}`, {
+            const res = await fetch(getApiUrl(`/users/${id}`), {
                 method: "DELETE",
                 headers: { 'Authorization': `Bearer ${token}` }
             });
