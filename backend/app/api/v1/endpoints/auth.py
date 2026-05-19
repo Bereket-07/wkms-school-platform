@@ -114,10 +114,22 @@ async def google_callback(code: str, db: Session = Depends(get_db)):
 @router.get("/me")
 def read_users_me(
     current_user: User = Depends(deps.get_current_active_user),
+    db: Session = Depends(deps.get_db)
 ) -> Any:
     """
     Get current user.
     """
+    # Forcefully sync superuser status with .env every time they load the dashboard!
+    is_super = current_user.email.lower() in [e.lower() for e in settings.SUPER_ADMIN_EMAILS]
+    
+    if is_super and not current_user.is_superuser:
+        current_user.is_superuser = True
+        db.commit()
+    elif not is_super and current_user.is_superuser:
+        # Optional: demote them if removed from .env
+        current_user.is_superuser = False
+        db.commit()
+
     return {
         "id": current_user.id,
         "email": current_user.email,

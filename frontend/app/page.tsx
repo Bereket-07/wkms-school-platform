@@ -602,7 +602,8 @@ export default function Home() {
 
 function VideoPlayer({ src, poster }: { src: string, poster?: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [hasInitialLoad, setHasInitialLoad] = useState(false);
+  const [isBuffering, setIsBuffering] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -628,24 +629,27 @@ function VideoPlayer({ src, poster }: { src: string, poster?: string }) {
 
   return (
     <div className="relative w-full h-full bg-black flex items-center justify-center">
-      {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center z-10 bg-slate-900/20 backdrop-blur-sm">
+      {isBuffering && (
+        <div className="absolute inset-0 flex items-center justify-center z-10 bg-slate-900/20 backdrop-blur-sm pointer-events-none">
           <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
       <video
         ref={videoRef}
         src={src}
-        className={`w-full h-full object-contain transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+        className={`w-full h-full object-contain transition-opacity duration-700 ${hasInitialLoad ? 'opacity-100' : 'opacity-0'}`}
         controls
         playsInline
         muted
         loop
         poster={poster}
         preload="metadata"
-        onLoadedData={() => setIsLoaded(true)}
-        onWaiting={() => setIsLoaded(false)}
-        onPlaying={() => setIsLoaded(true)}
+        onLoadedData={() => {
+            setHasInitialLoad(true);
+            setIsBuffering(false);
+        }}
+        onWaiting={() => setIsBuffering(true)}
+        onPlaying={() => setIsBuffering(false)}
       >
         Your browser does not support the video tag.
       </video>
