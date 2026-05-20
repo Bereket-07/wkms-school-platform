@@ -21,6 +21,10 @@ school.example.com {
         reverse_proxy localhost:8000
     }
 
-    # Enable Gzip compression
-    encode gzip
+    # Enable Gzip compression for everything EXCEPT static media
+    # Compressing MP4 files breaks HTTP Range Requests and causes massive buffering/lagging!
+    @notStatic {
+        not path /static/*
+    }
+    encode @notStatic gzip
 }
