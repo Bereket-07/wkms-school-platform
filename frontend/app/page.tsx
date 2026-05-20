@@ -385,10 +385,9 @@ export default function Home() {
       </section>
 
       {/* --- VIDEO GALLERY SECTION --- */}
-      < section id="videos" className="py-32 bg-white text-brand-dark relative overflow-hidden" >
+      <section id="videos" className="py-32 bg-white text-brand-dark relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
-        {/* Cinematic Glows */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] bg-brand-light/30 blur-[150px] rounded-full pointer-events-none"></div>
+        {/* Removed heavy blur effect that was causing GPU lagging */}
 
         <div className="container mx-auto px-6 md:px-12 relative z-10">
           <div className="text-center mb-16 space-y-4">
@@ -405,21 +404,12 @@ export default function Home() {
 
               {/* Main Stage */}
               <div className="relative aspect-video bg-slate-900 rounded-[2rem] overflow-hidden shadow-[0_25px_50px_-12px_rgba(0,0,0,0.2)] border border-slate-200">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={currentVideoIndex}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 1.05 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                    className="w-full h-full relative"
-                  >
-                    <VideoPlayer
-                      src={videoItems[currentVideoIndex].url}
-                      poster={videoItems[currentVideoIndex].url ? `${videoItems[currentVideoIndex].url}#t=0.1` : undefined}
-                    />
-                  </motion.div>
-                </AnimatePresence>
+                <div className="w-full h-full relative">
+                  <VideoPlayer
+                    src={videoItems[currentVideoIndex].url}
+                    poster={videoItems[currentVideoIndex].url ? `${videoItems[currentVideoIndex].url}#t=0.1` : undefined}
+                  />
+                </div>
               </div>
 
               {/* Navigation Arrows (Only if > 1 video) */}
@@ -601,36 +591,20 @@ export default function Home() {
 }
 
 function VideoPlayer({ src, poster }: { src: string, poster?: string }) {
-  const [hasInitialLoad, setHasInitialLoad] = useState(false);
-  const [isBuffering, setIsBuffering] = useState(true);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
+  // Use a completely standard video tag without heavy React state or IntersectionObservers
+  // to prevent playback lagging on heavy files.
   return (
     <div className="relative w-full h-full bg-black flex items-center justify-center">
-      {isBuffering && (
-        <div className="absolute inset-0 flex items-center justify-center z-10 bg-slate-900/20 backdrop-blur-sm pointer-events-none">
-          <div className="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
       <video
-        ref={videoRef}
         src={src}
-        className={`w-full h-full object-contain transition-opacity duration-700 ${hasInitialLoad ? 'opacity-100' : 'opacity-0'}`}
+        className="w-full h-full object-contain"
         controls
         playsInline
         muted
         loop
         poster={poster}
         preload="metadata"
-        onLoadedData={() => {
-            setHasInitialLoad(true);
-            setIsBuffering(false);
-        }}
-        onWaiting={() => setIsBuffering(true)}
-        onPlaying={() => setIsBuffering(false)}
-      >
-        Your browser does not support the video tag.
-      </video>
+      />
     </div>
   );
 }
