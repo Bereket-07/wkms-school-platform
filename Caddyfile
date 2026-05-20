@@ -1,5 +1,5 @@
-# Replace 'school.example.com' with your actual domain name
-school.example.com {
+# Live domain name for SSL
+wakerokelborofoundation.org {
     # Frontend (Next.js)
     reverse_proxy localhost:3000
 
