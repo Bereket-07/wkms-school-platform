@@ -265,13 +265,13 @@ export default function Home() {
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16 flex flex-col items-center">
             <div className="inline-block border-b-[2px] border-brand-dark pb-0.5 mb-6">
-              <span className="text-brand-dark font-bold text-[16px]">Radical Transparency</span>
+              <span className="text-brand-dark font-bold text-[16px]">{_t('transparency_badge', 'Radical Transparency')}</span>
             </div>
             <h2 className="text-6xl md:text-[85px] font-sans font-black text-brand-dark leading-[1] tracking-tight mb-12">
-              Every cent counted
+              {_t('transparency_title', 'Every cent counted')}
             </h2>
             <p className="text-lg md:text-[19px] text-slate-300 font-light max-w-2xl mx-auto leading-relaxed">
-              Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.
+              {_t('transparency_subtitle', 'Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.')}
             </p>
           </div>
 
@@ -286,8 +286,8 @@ export default function Home() {
                 <div className="w-[72px] h-[72px] bg-white rounded-full flex items-center justify-center text-brand-orange mb-3 shadow-sm border border-brand-orange/10">
                   <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
                 </div>
-                <div className="text-[44px] font-sans font-black text-brand-dark mb-1 leading-none tracking-tight">60%</div>
-                <h3 className="text-[14px] font-light font-sans text-brand-dark tracking-wide">Direct Education</h3>
+                <div className="text-[44px] font-sans font-black text-brand-dark mb-1 leading-none tracking-tight">{_t('transparency_stat_1_val', '60%')}</div>
+                <h3 className="text-[14px] font-light font-sans text-brand-dark tracking-wide">{_t('transparency_stat_1_label', 'Direct Education')}</h3>
               </div>
             </div>
 
@@ -300,8 +300,8 @@ export default function Home() {
                 <div className="w-[72px] h-[72px] bg-white rounded-full flex items-center justify-center text-brand-orange mb-3 shadow-sm border border-brand-orange/10">
                   <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
                 </div>
-                <div className="text-[44px] font-sans font-black text-brand-dark mb-1 leading-none tracking-tight">30%</div>
-                <h3 className="text-[14px] font-light font-sans text-brand-dark tracking-wide">Student Welfare</h3>
+                <div className="text-[44px] font-sans font-black text-brand-dark mb-1 leading-none tracking-tight">{_t('transparency_stat_2_val', '30%')}</div>
+                <h3 className="text-[14px] font-light font-sans text-brand-dark tracking-wide">{_t('transparency_stat_2_label', 'Student Welfare')}</h3>
               </div>
             </div>
 
@@ -314,8 +314,8 @@ export default function Home() {
                 <div className="w-[72px] h-[72px] bg-white rounded-full flex items-center justify-center text-brand-orange mb-3 shadow-sm border border-brand-orange/10">
                   <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
                 </div>
-                <div className="text-[44px] font-sans font-black text-brand-dark mb-1 leading-none tracking-tight">10%</div>
-                <h3 className="text-[14px] font-light font-sans text-brand-dark tracking-wide">Ops & Admin</h3>
+                <div className="text-[44px] font-sans font-black text-brand-dark mb-1 leading-none tracking-tight">{_t('transparency_stat_3_val', '10%')}</div>
+                <h3 className="text-[14px] font-light font-sans text-brand-dark tracking-wide">{_t('transparency_stat_3_label', 'Ops & Admin')}</h3>
               </div>
             </div>
 

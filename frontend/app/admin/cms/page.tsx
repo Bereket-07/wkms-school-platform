@@ -78,7 +78,7 @@ export default function CMSPage() {
         }
     };
 
-    const sections = ["BRANDING", "HERO", "ABOUT", "IMPACT", "MEDIA", "VIDEOS", "COMMUNITY", "FOOTER"];
+    const sections = ["BRANDING", "HERO", "INTRO STATS", "ABOUT", "TRANSPARENCY", "MEDIA", "VIDEOS", "COMMUNITY", "FOOTER"];
     const allTabs = sections;
 
     if (loading) return <div className="flex h-96 items-center justify-center"><Loader2 className="animate-spin w-8 h-8 text-emerald-600" /></div>;
@@ -440,38 +440,14 @@ export default function CMSPage() {
                                 </div>
                             )}
 
-                            {/* --- VISUAL EDITOR: IMPACT SECTION --- */}
-                            {activeTab === 'IMPACT' && (
+                            {/* --- VISUAL EDITOR: INTRO STATS SECTION --- */}
+                            {activeTab === 'INTRO STATS' && (
                                 <div className="space-y-8">
                                     <div className="bg-emerald-50 rounded-[2rem] p-8 border border-emerald-100">
-                                        <div className="text-center space-y-4 max-w-2xl mx-auto mb-10">
-                                            <div className="flex justify-center">
-                                                <input
-                                                    value={formState['impact_badge'] || ''}
-                                                    onChange={(e) => handleInputChange('impact_badge', e.target.value)}
-                                                    className="bg-white border-2 border-emerald-100 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 outline-none focus:border-emerald-300 transition text-center w-48"
-                                                    placeholder="Badge"
-                                                />
-                                            </div>
-                                            <input
-                                                value={formState['impact_title'] || ''}
-                                                onChange={(e) => handleInputChange('impact_title', e.target.value)}
-                                                className="w-full bg-transparent text-4xl font-serif font-bold text-center text-emerald-900 outline-none placeholder:text-emerald-900/30"
-                                                placeholder="Impact Title"
-                                            />
-                                            <textarea
-                                                value={formState['impact_subtitle'] || ''}
-                                                onChange={(e) => handleInputChange('impact_subtitle', e.target.value)}
-                                                rows={2}
-                                                className="w-full bg-transparent text-lg text-emerald-700/80 text-center outline-none resize-none"
-                                                placeholder="Subtitle..."
-                                            />
-                                        </div>
-
-                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                            {[1, 2, 3].map(i => (
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                                            {[1, 2].map(i => (
                                                 <div key={i} className="bg-white p-6 rounded-2xl shadow-sm space-y-2 border border-emerald-100/50">
-                                                    <label className="text-xs font-bold text-emerald-300 uppercase tracking-widest block text-center">Stat {i}</label>
+                                                    <label className="text-xs font-bold text-emerald-300 uppercase tracking-widest block text-center">Intro Stat {i}</label>
                                                     <input
                                                         value={formState[`impact_stat_${i}_val`] || ''}
                                                         onChange={(e) => handleInputChange(`impact_stat_${i}_val`, e.target.value)}
@@ -483,6 +459,57 @@ export default function CMSPage() {
                                                         onChange={(e) => handleInputChange(`impact_stat_${i}_label`, e.target.value)}
                                                         className="w-full text-sm font-bold uppercase tracking-wider text-emerald-600 text-center outline-none"
                                                         placeholder="LABEL"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* --- VISUAL EDITOR: TRANSPARENCY SECTION --- */}
+                            {activeTab === 'TRANSPARENCY' && (
+                                <div className="space-y-8">
+                                    <div className="bg-emerald-50 rounded-[2rem] p-8 border border-emerald-100">
+                                        <div className="text-center space-y-4 max-w-2xl mx-auto mb-10">
+                                            <div className="flex justify-center">
+                                                <input
+                                                    value={formState['transparency_badge'] || ''}
+                                                    onChange={(e) => handleInputChange('transparency_badge', e.target.value)}
+                                                    className="bg-white border-2 border-emerald-100 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-emerald-600 outline-none focus:border-emerald-300 transition text-center w-48"
+                                                    placeholder="Radical Transparency"
+                                                />
+                                            </div>
+                                            <input
+                                                value={formState['transparency_title'] || ''}
+                                                onChange={(e) => handleInputChange('transparency_title', e.target.value)}
+                                                className="w-full bg-transparent text-4xl font-serif font-bold text-center text-emerald-900 outline-none placeholder:text-emerald-900/30"
+                                                placeholder="Every cent counted"
+                                            />
+                                            <textarea
+                                                value={formState['transparency_subtitle'] || ''}
+                                                onChange={(e) => handleInputChange('transparency_subtitle', e.target.value)}
+                                                rows={2}
+                                                className="w-full bg-transparent text-lg text-emerald-700/80 text-center outline-none resize-none"
+                                                placeholder="Subtitle..."
+                                            />
+                                        </div>
+
+                                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                            {[1, 2, 3].map(i => (
+                                                <div key={i} className="bg-white p-6 rounded-2xl shadow-sm space-y-2 border border-emerald-100/50">
+                                                    <label className="text-xs font-bold text-emerald-300 uppercase tracking-widest block text-center">Circle Stat {i}</label>
+                                                    <input
+                                                        value={formState[`transparency_stat_${i}_val`] || ''}
+                                                        onChange={(e) => handleInputChange(`transparency_stat_${i}_val`, e.target.value)}
+                                                        className="w-full text-4xl font-serif font-bold text-emerald-900 text-center outline-none"
+                                                        placeholder="60%"
+                                                    />
+                                                    <input
+                                                        value={formState[`transparency_stat_${i}_label`] || ''}
+                                                        onChange={(e) => handleInputChange(`transparency_stat_${i}_label`, e.target.value)}
+                                                        className="w-full text-sm font-bold uppercase tracking-wider text-emerald-600 text-center outline-none"
+                                                        placeholder="Direct Education"
                                                     />
                                                 </div>
                                             ))}
