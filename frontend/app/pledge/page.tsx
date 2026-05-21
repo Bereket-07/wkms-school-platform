@@ -90,7 +90,7 @@ function PledgeForm() {
                 <div className="w-16 h-16 bg-brand-light rounded-full flex items-center justify-center mx-auto mb-4">
                     <Heart className="w-8 h-8 text-brand-dark" />
                 </div>
-                <h2 className="text-3xl font-serif font-bold text-slate-900 mb-3">Make a Pledge</h2>
+                <h2 className="text-3xl font-serif font-bold text-slate-900 mb-3">Donate Now</h2>
                 <p className="text-slate-500">
                     Be the first to donate when we launch. Leave your details below and we'll notify you.
                 </p>

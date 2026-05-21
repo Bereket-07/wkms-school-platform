@@ -96,7 +96,7 @@ export default function Home() {
                 href="/pledge"
                 className="bg-brand-red hover:bg-[#d4151a] text-white text-[17px] px-8 py-3.5 rounded-md font-medium transition-all duration-300 flex items-center gap-3 shadow-lg"
               >
-                Start donating <ArrowRight className="w-4 h-4" />
+                Donate Now <ArrowRight className="w-4 h-4" />
               </Link>
               <button
                 onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
@@ -487,7 +487,7 @@ export default function Home() {
               </p>
               
               <Link href="/pledge" className="inline-flex items-center gap-2.5 bg-brand-red text-white text-[15px] px-8 py-3.5 rounded-md font-medium hover:bg-[#d4151a] shadow-lg transition-colors">
-                Make a pledge <Heart className="w-4 h-4 fill-white text-white" />
+                Donate Now <Heart className="w-4 h-4 fill-white text-white" />
               </Link>
             </div>
           </div>

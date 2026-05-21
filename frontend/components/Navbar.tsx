@@ -80,7 +80,13 @@ export default function Navbar() {
             >
                 <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-3 group" onClick={handleLinkClick}>
+                    <Link href="/" className="flex items-center gap-3 group" onClick={(e) => {
+                        handleLinkClick();
+                        if (pathname === '/') {
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                            e.preventDefault();
+                        }
+                    }}>
                         <div className="relative w-16 md:w-20 h-auto flex-shrink-0 group-hover:scale-105 transition-transform duration-300">
                             <img
                                 src={logoUrl}
