@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
       <div className="bg-brand-dark text-white pt-24 pb-32 px-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10"></div>
         <div className="max-w-4xl mx-auto relative z-10">
-          <Link href="/" className="inline-flex items-center text-brand-light hover:text-white font-bold mb-8 transition-colors duration-300">
+          <Link href="/" className="inline-flex items-center text-white bg-white/10 hover:bg-white/20 border border-white/20 px-5 py-2.5 rounded-full font-bold mb-8 transition-all duration-300 backdrop-blur-md hover:scale-105 active:scale-95">
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Home
           </Link>
@@ -45,10 +45,6 @@ export default function PrivacyPolicy() {
                 </li>
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-brand-light mt-2.5 shrink-0"></div>
-                  Sign up for our newsletter
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-light mt-2.5 shrink-0"></div>
                   Contact us directly
                 </li>
               </ul>
@@ -80,10 +76,6 @@ export default function PrivacyPolicy() {
                 <li className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-brand-light mt-2.5 shrink-0"></div>
                   Respond to your inquiries and offer support
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-light mt-2.5 shrink-0"></div>
-                  Send marketing and promotional communications (if you have opted in)
                 </li>
               </ul>
             </section>
