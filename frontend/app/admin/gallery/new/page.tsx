@@ -123,6 +123,7 @@ export default function NewMedia() {
                                         }}
                                     />
                                 </label>
+                            )}
                         </div>
                         )}
                     </div>
