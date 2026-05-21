@@ -100,14 +100,14 @@ export default function GalleryPage({ embedded = false, limitType }: { embedded?
                                 </div>
                             </div>
                         ) : item.media_type === 'YOUTUBE_URL' ? (
-                            <div className="w-full h-full bg-slate-100 relative">
+                            <div className="w-full h-full bg-slate-100 relative overflow-hidden">
                                 <iframe 
                                     width="100%" 
                                     height="100%" 
-                                    src={item.url.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/').split('&')[0]} 
+                                    src={`https://www.youtube.com/embed/${item.url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/)?.[1] || ''}?controls=0&showinfo=0&rel=0`}
                                     frameBorder="0" 
                                     allowFullScreen 
-                                    className="w-full h-full object-cover pointer-events-none"
+                                    className="w-full h-full pointer-events-none scale-[1.3]"
                                 />
                                 <div className="absolute top-2 right-2 bg-red-600/80 p-1.5 rounded-full text-white backdrop-blur-sm shadow-md flex items-center justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>

@@ -61,12 +61,12 @@ export default function NewMedia() {
                                     value={formData.url}
                                     onChange={(e) => setFormData({ ...formData, url: e.target.value })}
                                 />
-                                {formData.url && (formData.url.includes('youtube') || formData.url.includes('youtu.be')) && (
+                                {formData.url && (formData.url.includes('youtube') || formData.url.includes('youtu.be')) && formData.url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/) && (
                                     <div className="mt-4 aspect-video rounded-lg overflow-hidden border border-slate-200 shadow-sm pointer-events-none">
                                         <iframe 
                                             width="100%" 
                                             height="100%" 
-                                            src={formData.url.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/').split('&')[0]} 
+                                            src={`https://www.youtube.com/embed/${formData.url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/)?.[1]}`}
                                             frameBorder="0" 
                                             allowFullScreen 
                                         />

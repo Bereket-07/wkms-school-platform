@@ -588,22 +588,25 @@ export default function Home() {
 
 function VideoPlayer({ src, poster }: { src: string, poster?: string }) {
   if (src && (src.includes('youtube.com') || src.includes('youtu.be'))) {
-    const embedSrc = src.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/').split('&')[0];
-    const videoId = embedSrc.split('/').pop();
-    return (
-      <div className="relative w-full h-full bg-black flex items-center justify-center">
-        <iframe
-          width="100%"
-          height="100%"
-          src={`${embedSrc}?autoplay=1&mute=1&loop=1&playlist=${videoId}`}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          className="w-full h-full object-cover pointer-events-none scale-105"
-        ></iframe>
-      </div>
-    );
+    const match = src.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+    const videoId = match ? match[1] : null;
+    
+    if (videoId) {
+      return (
+        <div className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden">
+          <iframe
+            width="100%"
+            height="100%"
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0`}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full pointer-events-none scale-[1.3]"
+          ></iframe>
+        </div>
+      );
+    }
   }
 
   // Use a completely standard video tag without heavy React state or IntersectionObservers
