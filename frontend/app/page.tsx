@@ -477,13 +477,13 @@ export default function Home() {
           <div className="bg-brand-dark rounded-[1.5rem] p-12 md:p-20 shadow-2xl text-center relative overflow-hidden">
             <div className="flex flex-col items-center mb-8 relative z-10">
               <div className="inline-block border-b border-white pb-1 mb-6">
-                <span className="text-white font-medium text-[15px] tracking-wide">Take action</span>
+                <span className="text-white font-medium text-[15px] tracking-wide">{_t('cta_badge', 'Take action')}</span>
               </div>
               <h2 className="text-5xl md:text-[68px] font-sans font-black text-white leading-[1] tracking-tight mb-8">
-                Ready to change a life?
+                {_t('cta_title', 'Ready to change a life?')}
               </h2>
-              <p className="text-[17px] text-white/50 max-w-3xl mx-auto mb-12 font-light leading-relaxed">
-                Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.
+              <p className="text-[17px] text-white/50 max-w-3xl mx-auto mb-12 font-light leading-relaxed whitespace-pre-wrap">
+                {_t('cta_desc', 'Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.')}
               </p>
               
               <Link href="/pledge" className="inline-flex items-center gap-2.5 bg-brand-red text-white text-[15px] px-8 py-3.5 rounded-md font-medium hover:bg-[#d4151a] shadow-lg transition-colors">

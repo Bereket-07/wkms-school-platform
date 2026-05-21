@@ -78,7 +78,7 @@ export default function CMSPage() {
         }
     };
 
-    const sections = ["BRANDING", "HERO", "INTRO STATS", "ABOUT", "TRANSPARENCY", "MEDIA", "VIDEOS", "COMMUNITY", "FOOTER"];
+    const sections = ["BRANDING", "HERO", "INTRO STATS", "ABOUT", "TRANSPARENCY", "MEDIA", "VIDEOS", "COMMUNITY", "CTA", "FOOTER"];
     const allTabs = sections;
 
     if (loading) return <div className="flex h-96 items-center justify-center"><Loader2 className="animate-spin w-8 h-8 text-emerald-600" /></div>;
@@ -652,6 +652,37 @@ export default function CMSPage() {
                                 </div>
                             )}
 
+                            {/* --- VISUAL EDITOR: CTA SECTION --- */}
+                            {activeTab === 'CTA' && (
+                                <div className="space-y-6">
+                                    <div className="bg-brand-dark rounded-[2rem] p-10 text-white text-center">
+                                        <div className="flex flex-col items-center mb-8">
+                                            <div className="inline-block border-b border-white pb-1 mb-6">
+                                                <input
+                                                    value={formState['cta_badge'] || ''}
+                                                    onChange={(e) => handleInputChange('cta_badge', e.target.value)}
+                                                    className="bg-transparent text-white font-medium text-[15px] tracking-wide text-center outline-none w-48 placeholder:text-white/30"
+                                                    placeholder="Take action"
+                                                />
+                                            </div>
+                                            <input
+                                                value={formState['cta_title'] || ''}
+                                                onChange={(e) => handleInputChange('cta_title', e.target.value)}
+                                                className="w-full text-4xl font-sans font-black text-white text-center outline-none bg-transparent placeholder:opacity-30 mb-8"
+                                                placeholder="Ready to change a life?"
+                                            />
+                                            <textarea
+                                                value={formState['cta_desc'] || ''}
+                                                onChange={(e) => handleInputChange('cta_desc', e.target.value)}
+                                                rows={2}
+                                                className="w-full max-w-3xl text-[17px] text-white/50 bg-transparent text-center outline-none resize-none placeholder:text-white/30 font-light mx-auto"
+                                                placeholder="Providing quality education..."
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                             {/* --- VISUAL EDITOR: FOOTER SECTION --- */}
                             {activeTab === 'FOOTER' && (
                                 <div className="space-y-6">
@@ -674,7 +705,7 @@ export default function CMSPage() {
                             )}
 
                             {/* --- FALLBACK FOR OTHER TABS --- */}
-                            {allTabs.includes(activeTab) && !['BRANDING', 'HERO', 'ABOUT', 'IMPACT', 'MEDIA', 'VIDEOS', 'COMMUNITY', 'FOOTER'].includes(activeTab) && (
+                            {allTabs.includes(activeTab) && !['BRANDING', 'HERO', 'ABOUT', 'IMPACT', 'TRANSPARENCY', 'INTRO STATS', 'MEDIA', 'VIDEOS', 'COMMUNITY', 'CTA', 'FOOTER'].includes(activeTab) && (
                                 <div className="p-8 text-center text-slate-400">
                                     Select a section to edit.
                                 </div>
