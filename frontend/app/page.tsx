@@ -121,8 +121,8 @@ export default function Home() {
 
       {/* Intro Stats Section */}
       <section className="py-24 bg-brand-light">
-        <div className="container mx-auto px-6 md:px-12 max-w-5xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 text-center divide-y md:divide-y-0 md:divide-x divide-brand-dark/20">
+        <div className="container mx-auto px-6 md:px-12 max-w-4xl">
+          <div className="grid grid-cols-1 md:grid-cols-2 text-center divide-y md:divide-y-0 md:divide-x divide-brand-dark/20">
             <div className="py-8 md:py-0 px-6">
               <h3 className="text-6xl md:text-7xl font-sans font-black text-brand-dark tracking-tight mb-3">{_t('impact_stat_1_val', '513')}</h3>
               <p className="text-brand-dark/70 font-sans text-base">{_t('impact_stat_1_label', 'Students enrolled')}</p>
@@ -130,10 +130,6 @@ export default function Home() {
             <div className="py-8 md:py-0 px-6">
               <h3 className="text-6xl md:text-7xl font-sans font-black text-brand-dark tracking-tight mb-3">{_t('impact_stat_2_val', '98%')}</h3>
               <p className="text-brand-dark/70 font-sans text-base">{_t('impact_stat_2_label', 'Pass rate')}</p>
-            </div>
-            <div className="py-8 md:py-0 px-6">
-              <h3 className="text-6xl md:text-7xl font-sans font-black text-brand-dark tracking-tight mb-3">{_t('impact_stat_3_val', '15+')}</h3>
-              <p className="text-brand-dark/70 font-sans text-base">{_t('impact_stat_3_label', 'Community Projects')}</p>
             </div>
           </div>
         </div>
