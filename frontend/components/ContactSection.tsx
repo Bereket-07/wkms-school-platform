@@ -13,7 +13,8 @@ type FormData = {
     message: string;
 };
 
-export default function ContactSection() {
+export default function ContactSection({ content = {} }: { content?: Record<string, string> }) {
+    const _t = (key: string, fallback: string = "") => content[key] || fallback;
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
     const [errorMessage, setErrorMessage] = useState('');
@@ -37,13 +38,13 @@ export default function ContactSection() {
             <div className="container mx-auto max-w-5xl relative z-10">
                 <div className="text-center mb-16 flex flex-col items-center">
                     <div className="inline-block border-b border-brand-dark pb-0.5 mb-6">
-                        <span className="text-brand-dark font-bold tracking-wide text-sm">Get in touch</span>
+                        <span className="text-brand-dark font-bold tracking-wide text-sm">{_t('contact_badge', 'Get in touch')}</span>
                     </div>
                     <h2 className="text-5xl md:text-[72px] font-sans font-black text-brand-dark leading-[1] tracking-[-0.02em] mb-8">
-                        We'd love to hear from you
+                        {_t('contact_title', "We'd love to hear from you")}
                     </h2>
                     <p className="text-[17px] text-[#b3b3b3] font-light max-w-2xl mx-auto leading-relaxed">
-                        Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.
+                        {_t('contact_desc', 'Providing quality education to 500+ students in rural Ethiopia. We are the bridge between your generosity and their future.')}
                     </p>
                 </div>
 

@@ -78,7 +78,7 @@ export default function CMSPage() {
         }
     };
 
-    const sections = ["BRANDING", "HERO", "INTRO STATS", "ABOUT", "TRANSPARENCY", "MEDIA", "VIDEOS", "COMMUNITY", "CTA", "FOOTER"];
+    const sections = ["BRANDING", "HERO", "INTRO STATS", "ABOUT", "TRANSPARENCY", "MEDIA", "VIDEOS", "COMMUNITY", "CTA", "CONTACT", "FOOTER"];
     const allTabs = sections;
 
     if (loading) return <div className="flex h-96 items-center justify-center"><Loader2 className="animate-spin w-8 h-8 text-emerald-600" /></div>;
@@ -683,6 +683,37 @@ export default function CMSPage() {
                                 </div>
                             )}
 
+                            {/* --- VISUAL EDITOR: CONTACT SECTION --- */}
+                            {activeTab === 'CONTACT' && (
+                                <div className="space-y-6">
+                                    <div className="bg-white rounded-[2rem] p-10 text-center border border-slate-100 shadow-sm">
+                                        <div className="flex flex-col items-center mb-8">
+                                            <div className="inline-block border-b border-brand-dark pb-0.5 mb-6">
+                                                <input
+                                                    value={formState['contact_badge'] || ''}
+                                                    onChange={(e) => handleInputChange('contact_badge', e.target.value)}
+                                                    className="bg-transparent text-brand-dark font-bold tracking-wide text-sm text-center outline-none w-48 placeholder:text-brand-dark/30"
+                                                    placeholder="Get in touch"
+                                                />
+                                            </div>
+                                            <input
+                                                value={formState['contact_title'] || ''}
+                                                onChange={(e) => handleInputChange('contact_title', e.target.value)}
+                                                className="w-full text-4xl md:text-[50px] font-sans font-black text-brand-dark text-center outline-none bg-transparent placeholder:opacity-30 mb-8"
+                                                placeholder="We'd love to hear from you"
+                                            />
+                                            <textarea
+                                                value={formState['contact_desc'] || ''}
+                                                onChange={(e) => handleInputChange('contact_desc', e.target.value)}
+                                                rows={2}
+                                                className="w-full max-w-3xl text-[17px] text-slate-500 bg-transparent text-center outline-none resize-none placeholder:text-slate-300 font-light mx-auto"
+                                                placeholder="Providing quality education..."
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                             {/* --- VISUAL EDITOR: FOOTER SECTION --- */}
                             {activeTab === 'FOOTER' && (
                                 <div className="space-y-6">
@@ -705,7 +736,7 @@ export default function CMSPage() {
                             )}
 
                             {/* --- FALLBACK FOR OTHER TABS --- */}
-                            {allTabs.includes(activeTab) && !['BRANDING', 'HERO', 'ABOUT', 'IMPACT', 'TRANSPARENCY', 'INTRO STATS', 'MEDIA', 'VIDEOS', 'COMMUNITY', 'CTA', 'FOOTER'].includes(activeTab) && (
+                            {allTabs.includes(activeTab) && !['BRANDING', 'HERO', 'ABOUT', 'IMPACT', 'TRANSPARENCY', 'INTRO STATS', 'MEDIA', 'VIDEOS', 'COMMUNITY', 'CTA', 'CONTACT', 'FOOTER'].includes(activeTab) && (
                                 <div className="p-8 text-center text-slate-400">
                                     Select a section to edit.
                                 </div>

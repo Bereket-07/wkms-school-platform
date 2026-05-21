@@ -496,7 +496,7 @@ export default function Home() {
 
 
       {/* Contact Section */}
-      < ContactSection />
+      < ContactSection content={content} />
 
       {/* Footer */}
       <footer className="bg-white pt-24 pb-16">
