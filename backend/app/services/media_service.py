@@ -14,7 +14,11 @@ class MediaCreate(BaseModel):
 def get_multi(db: Session, skip: int = 0, limit: int = 100, media_type: Optional[str] = None) -> List[Media]:
     query = db.query(Media)
     if media_type:
-        query = query.filter(Media.media_type == media_type)
+        if "," in media_type:
+            types = media_type.split(",")
+            query = query.filter(Media.media_type.in_(types))
+        else:
+            query = query.filter(Media.media_type == media_type)
     return query.order_by(Media.created_at.desc()).offset(skip).limit(limit).all()
 
 def create(db: Session, obj_in: MediaCreate) -> Media:

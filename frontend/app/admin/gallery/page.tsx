@@ -99,6 +99,20 @@ export default function GalleryPage({ embedded = false, limitType }: { embedded?
                                     <Eye className="w-3 h-3" />
                                 </div>
                             </div>
+                        ) : item.media_type === 'YOUTUBE_URL' ? (
+                            <div className="w-full h-full bg-slate-100 relative">
+                                <iframe 
+                                    width="100%" 
+                                    height="100%" 
+                                    src={item.url.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/').split('&')[0]} 
+                                    frameBorder="0" 
+                                    allowFullScreen 
+                                    className="w-full h-full object-cover pointer-events-none"
+                                />
+                                <div className="absolute top-2 right-2 bg-red-600/80 p-1.5 rounded-full text-white backdrop-blur-sm shadow-md flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+                                </div>
+                            </div>
                         ) : (
                             <div className="w-full h-full relative">
                                 <img
@@ -112,7 +126,7 @@ export default function GalleryPage({ embedded = false, limitType }: { embedded?
                         {/* Overlay Actions */}
                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
                             <div className="flex justify-between items-start">
-                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md text-white backdrop-blur-md ${item.media_type === 'VIDEO' || item.media_type === 'video' ? 'bg-sky-500/80' : 'bg-emerald-500/80'}`}>
+                                <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-md text-white backdrop-blur-md ${item.media_type === 'VIDEO' || item.media_type === 'video' ? 'bg-sky-500/80' : item.media_type === 'YOUTUBE_URL' ? 'bg-red-500/80' : 'bg-emerald-500/80'}`}>
                                     {item.media_type}
                                 </span>
                             </div>

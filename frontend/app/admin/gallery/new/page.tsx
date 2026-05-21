@@ -48,9 +48,32 @@ export default function NewMedia() {
                 {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg mb-4 text-sm">{error}</div>}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* File Upload Area */}
+                    {/* File Upload Area or URL Input */}
                     <div>
-                        <label className="block text-sm font-medium text-slate-700 mb-2">Media File</label>
+                        <label className="block text-sm font-medium text-slate-700 mb-2">Media Source</label>
+                        {formData.media_type === 'YOUTUBE_URL' ? (
+                            <div className="border-2 border-slate-200 rounded-xl p-8 bg-slate-50 transition-colors">
+                                <label className="block text-sm font-medium text-slate-700 mb-2">YouTube Video URL</label>
+                                <input
+                                    type="url"
+                                    className="w-full border border-slate-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-emerald-500 outline-none bg-white"
+                                    placeholder="https://www.youtube.com/watch?v=..."
+                                    value={formData.url}
+                                    onChange={(e) => setFormData({ ...formData, url: e.target.value })}
+                                />
+                                {formData.url && (formData.url.includes('youtube') || formData.url.includes('youtu.be')) && (
+                                    <div className="mt-4 aspect-video rounded-lg overflow-hidden border border-slate-200 shadow-sm pointer-events-none">
+                                        <iframe 
+                                            width="100%" 
+                                            height="100%" 
+                                            src={formData.url.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/').split('&')[0]} 
+                                            frameBorder="0" 
+                                            allowFullScreen 
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
                         <div className="border-2 border-dashed border-slate-200 rounded-xl p-8 text-center hover:bg-slate-50 transition-colors group relative overflow-hidden">
                             {formData.url ? (
                                 <div className="relative h-64 w-full">
@@ -100,8 +123,8 @@ export default function NewMedia() {
                                         }}
                                     />
                                 </label>
-                            )}
                         </div>
+                        )}
                     </div>
 
                     {/* Use existing inputs for Meta */}

@@ -587,6 +587,25 @@ export default function Home() {
 }
 
 function VideoPlayer({ src, poster }: { src: string, poster?: string }) {
+  if (src && (src.includes('youtube.com') || src.includes('youtu.be'))) {
+    const embedSrc = src.replace('watch?v=', 'embed/').replace('youtu.be/', 'www.youtube.com/embed/').split('&')[0];
+    const videoId = embedSrc.split('/').pop();
+    return (
+      <div className="relative w-full h-full bg-black flex items-center justify-center">
+        <iframe
+          width="100%"
+          height="100%"
+          src={`${embedSrc}?autoplay=1&mute=1&loop=1&playlist=${videoId}`}
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="w-full h-full object-cover pointer-events-none scale-105"
+        ></iframe>
+      </div>
+    );
+  }
+
   // Use a completely standard video tag without heavy React state or IntersectionObservers
   // to prevent playback lagging on heavy files.
   return (

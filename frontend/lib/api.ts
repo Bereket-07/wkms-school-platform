@@ -90,7 +90,11 @@ export const getCampaign = async (slug: string): Promise<Campaign> => {
 export const getMedia = async (skip = 0, limit = 100, type?: string): Promise<MediaItem[]> => {
     let url = `/media/?skip=${skip}&limit=${limit}`;
     if (type) {
-        url += `&media_type=${type}`;
+        if (type === 'VIDEO') {
+            url += `&media_type=VIDEO,YOUTUBE_URL`;
+        } else {
+            url += `&media_type=${type}`;
+        }
     }
     const response = await api.get(url);
     return response.data;
