@@ -2,10 +2,10 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Donate",
-  description: "Make a direct impact. Donate to Wakero Keleboro Memorial Primary and middle school and help us provide quality education in rural Ethiopia.",
+  description: "Make a direct impact. Donate to Wakero Keleboro Memorial Primary and Middle School and help us provide quality education in rural Ethiopia.",
   openGraph: {
     title: "Donate | Wakero Keleboro Foundation",
-    description: "Make a direct impact. Donate to Wakero Keleboro Memorial Primary and middle school and help us provide quality education in rural Ethiopia.",
+    description: "Make a direct impact. Donate to Wakero Keleboro Memorial Primary and Middle School and help us provide quality education in rural Ethiopia.",
     url: "https://wakerokelborofoundation.org/donate",
   }
 };
@@ -24,7 +24,7 @@ export default function DonateLayout({
             "@context": "https://schema.org",
             "@type": "DonateAction",
             "name": "Donate to Wakero Keleboro Foundation",
-            "description": "Donate to support the Wakero Keleboro Memorial Primary and middle school.",
+            "description": "Donate to support the Wakero Keleboro Memorial Primary and Middle School.",
             "target": {
               "@type": "EntryPoint",
               "urlTemplate": "https://wakerokelborofoundation.org/donate",

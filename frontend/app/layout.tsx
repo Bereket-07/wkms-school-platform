@@ -36,11 +36,11 @@ const montserratAlt = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://wakerokelborofoundation.org"),
   title: {
-    default: "WKMS - Wakero Keleboro Memorial Primary and middle school",
+    default: "WKMS - Wakero Keleboro Memorial Primary and Middle School",
     template: "%s | Wakero Keleboro Foundation",
   },
   description: "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
-  keywords: ["Education in Ethiopia", "Wakero Keleboro Memorial Primary and middle school", "Rural School Ethiopia", "Charity for Education", "NGO Ethiopia", "Support Ethiopian Students", "Build Schools in Africa"],
+  keywords: ["Education in Ethiopia", "Wakero Keleboro Memorial Primary and Middle School", "Rural School Ethiopia", "Charity for Education", "NGO Ethiopia", "Support Ethiopian Students", "Build Schools in Africa"],
   authors: [{ name: "Wakero Keleboro Foundation" }],
   creator: "Wakero Keleboro Foundation",
   publisher: "Wakero Keleboro Foundation",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "WKMS - Wakero Keleboro Memorial Primary and middle school",
+    title: "WKMS - Wakero Keleboro Memorial Primary and Middle School",
     description: "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
     url: "https://wakerokelborofoundation.org",
     siteName: "Wakero Keleboro Foundation",
@@ -61,13 +61,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Wakero Keleboro Memorial Primary and middle school Students",
+        alt: "Wakero Keleboro Memorial Primary and Middle School Students",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "WKMS - Wakero Keleboro Memorial Primary and middle school",
+    title: "WKMS - Wakero Keleboro Memorial Primary and Middle School",
     description: "Connecting Education, Opportunity & Impact in rural Ethiopia.",
     creator: "@wkmspre_school", // Replace with actual handle if applicable
     images: ["/opengraph-image.png"],

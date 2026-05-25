@@ -104,11 +104,10 @@ function PledgeForm() {
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                    <label className="block text-sm font-bold text-slate-700">Full Name *</label>
+                    <label className="block text-sm font-bold text-slate-700">Full Name (Optional)</label>
                     <input
                         type="text"
                         name="donor_name"
-                        required
                         value={formData.donor_name}
                         onChange={handleChange}
                         className="w-full px-5 py-4 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-brand-dark focus:border-transparent transition-all outline-none text-slate-900"
