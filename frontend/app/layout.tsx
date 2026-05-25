@@ -44,6 +44,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Wakero Keleboro Foundation" }],
   creator: "Wakero Keleboro Foundation",
   publisher: "Wakero Keleboro Foundation",
+  icons: {
+    icon: '/wkmslogo.svg',
+    shortcut: '/wkmslogo.png',
+    apple: '/wkmslogo.png',
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -118,7 +123,7 @@ export default function RootLayout({
                   "url": "https://wakerokelborofoundation.org/",
                   "logo": {
                     "@type": "ImageObject",
-                    "url": "https://wakerokelborofoundation.org/icon.png"
+                    "url": "https://wakerokelborofoundation.org/wkmslogo.png"
                   },
                   "image": "https://wakerokelborofoundation.org/opengraph-image.png",
                   "description": "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
