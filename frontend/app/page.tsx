@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
-import { Play, Heart, Camera, ArrowRight, CheckCircle2, ChevronDown, Calendar, Users, Globe, BookOpen, PieChart, UserCheck } from "lucide-react";
+import { Play, Heart, Camera, ArrowRight, CheckCircle2, ChevronDown, Calendar, Users, Globe, BookOpen, PieChart, UserCheck, Volume2, VolumeX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getCampaigns, Campaign, getMedia, MediaItem, getSiteContent, SiteContent } from "@/lib/api";
 
@@ -15,6 +15,7 @@ export default function Home() {
   const [mediaItems, setMediaItems] = useState<MediaItem[]>([]);
   const [videoItems, setVideoItems] = useState<MediaItem[]>([]);
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
   const [loading, setLoading] = useState(true);
 
   // Helper to safely get content or fallback
@@ -333,7 +334,7 @@ export default function Home() {
           {loading ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 animate-pulse">
               {[1, 2, 3].map(i => (
-                <div key={i} className="bg-slate-800 aspect-[16/10]"></div>
+                <div key={i} className="bg-slate-800 aspect-[16/10] rounded-2xl md:rounded-[2rem]"></div>
               ))}
             </div>
           ) : (
@@ -355,7 +356,7 @@ export default function Home() {
                 {[...mediaItems, ...mediaItems].map((item, index) => (
                   <div
                     key={`img-${item.id}-${index}`}
-                    className="relative w-[280px] md:w-[480px] aspect-[16/10] overflow-hidden shrink-0 group cursor-pointer"
+                    className="relative w-[280px] md:w-[480px] aspect-[16/10] rounded-2xl md:rounded-[2rem] overflow-hidden shrink-0 group cursor-pointer shadow-[0_15px_30px_-5px_rgba(0,0,0,0.3)] border border-white/5"
                   >
                     <img
                       src={item.url}
@@ -404,7 +405,16 @@ export default function Home() {
                   <VideoPlayer
                     src={videoItems[currentVideoIndex].url}
                     poster={videoItems[currentVideoIndex].url ? `${videoItems[currentVideoIndex].url}#t=0.1` : undefined}
+                    isMuted={isMuted}
                   />
+                  {/* Floating Mute/Unmute toggle */}
+                  <button
+                    onClick={() => setIsMuted(!isMuted)}
+                    className="absolute bottom-6 right-6 w-12 h-12 bg-white/70 hover:bg-white backdrop-blur-md rounded-full flex items-center justify-center text-brand-dark transition-all duration-300 hover:scale-110 shadow-lg z-20"
+                    title={isMuted ? "Unmute" : "Mute"}
+                  >
+                    {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+                  </button>
                 </div>
               </div>
 
@@ -586,7 +596,125 @@ export default function Home() {
   );
 }
 
-function VideoPlayer({ src, poster }: { src: string, poster?: string }) {
+function VideoPlayer({ src, poster, isMuted }: { src: string, poster?: string, isMuted: boolean }) {
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const playerRef = useRef<any>(null);
+
+  // Sync isMuted to direct HTML5 video element
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
+
+  // Play direct HTML5 video automatically when src changes
+  useEffect(() => {
+    if (videoRef.current && src && !(src.includes('youtube.com') || src.includes('youtu.be'))) {
+      try {
+        videoRef.current.load();
+        videoRef.current.play().catch(err => {
+          console.log("Autoplay was prevented or interrupted", err);
+        });
+      } catch (err) {
+        console.error("Error attempting autoplay on direct video", err);
+      }
+    }
+  }, [src]);
+
+  // Sync isMuted to YouTube player using YT API
+  useEffect(() => {
+    const win = window as any;
+    if (src && (src.includes('youtube.com') || src.includes('youtu.be'))) {
+      const match = src.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
+      const videoId = match ? match[1] : null;
+
+      if (!videoId) return;
+
+      let player: any = null;
+
+      const initPlayer = () => {
+        if (win.YT && win.YT.Player && iframeRef.current) {
+          player = new win.YT.Player(iframeRef.current, {
+            events: {
+              onReady: (event: any) => {
+                playerRef.current = event.target;
+                if (isMuted) {
+                  event.target.mute();
+                } else {
+                  event.target.unMute();
+                }
+              }
+            }
+          });
+        }
+      };
+
+      // If YT API is already loaded, initialize player
+      if (win.YT && win.YT.Player) {
+        initPlayer();
+      } else {
+        // Otherwise load the script and wait
+        if (!win.document.getElementById('youtube-iframe-api-script')) {
+          const tag = win.document.createElement('script');
+          tag.id = 'youtube-iframe-api-script';
+          tag.src = 'https://www.youtube.com/iframe_api';
+          const firstScriptTag = win.document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+        }
+
+        // Set callback for when API is ready, or poll if already loading
+        const previousCallback = win.onYouTubeIframeAPIReady;
+        win.onYouTubeIframeAPIReady = () => {
+          if (previousCallback) previousCallback();
+          initPlayer();
+        };
+
+        // Fallback polling in case window.YT is defined by another instance
+        const checkYT = setInterval(() => {
+          if (win.YT && win.YT.Player) {
+            clearInterval(checkYT);
+            if (!playerRef.current) initPlayer();
+          }
+        }, 100);
+
+        return () => {
+          clearInterval(checkYT);
+          if (player && typeof player.destroy === 'function') {
+            player.destroy();
+          }
+          playerRef.current = null;
+        };
+      }
+
+      return () => {
+        if (player && typeof player.destroy === 'function') {
+          player.destroy();
+        }
+        playerRef.current = null;
+      };
+    }
+  }, [src]);
+
+  // Sync mute state when isMuted changes
+  useEffect(() => {
+    if (playerRef.current) {
+      try {
+        if (isMuted) {
+          if (typeof playerRef.current.mute === 'function') {
+            playerRef.current.mute();
+          }
+        } else {
+          if (typeof playerRef.current.unMute === 'function') {
+            playerRef.current.unMute();
+          }
+        }
+      } catch (err) {
+        console.error("Error setting mute state on YouTube player", err);
+      }
+    }
+  }, [isMuted]);
+
   if (src && (src.includes('youtube.com') || src.includes('youtu.be'))) {
     const match = src.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/);
     const videoId = match ? match[1] : null;
@@ -595,9 +723,10 @@ function VideoPlayer({ src, poster }: { src: string, poster?: string }) {
       return (
         <div className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden">
           <iframe
+            ref={iframeRef}
             width="100%"
             height="100%"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0`}
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&enablejsapi=1`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -614,11 +743,13 @@ function VideoPlayer({ src, poster }: { src: string, poster?: string }) {
   return (
     <div className="relative w-full h-full bg-black flex items-center justify-center">
       <video
+        ref={videoRef}
         src={src}
         className="w-full h-full object-contain"
         controls
         playsInline
-        muted
+        autoPlay
+        muted={isMuted}
         loop
         poster={poster}
         preload="metadata"
