@@ -726,12 +726,12 @@ function VideoPlayer({ src, poster, isMuted }: { src: string, poster?: string, i
             ref={iframeRef}
             width="100%"
             height="100%"
-            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&showinfo=0&rel=0&enablejsapi=1`}
+            src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=1&showinfo=0&rel=0&enablejsapi=1&cc_load_policy=1`}
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="w-full h-full pointer-events-none scale-[1.3]"
+            className="w-full h-full"
           ></iframe>
         </div>
       );
