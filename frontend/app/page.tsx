@@ -276,10 +276,10 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20 font-sans max-w-4xl mx-auto mt-24">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-16 lg:gap-20 font-sans max-w-4xl mx-auto mt-24">
             
             {/* Stat 1: Direct Education */}
-            <div className="relative group mx-auto w-64 h-64 flex items-center justify-center -mt-6 rounded-full bg-[#D7F2F1] transition-transform duration-300 hover:scale-105">
+            <div className="relative group mx-auto w-64 h-64 flex items-center justify-center mt-0 md:-mt-6 rounded-full bg-[#D7F2F1] transition-transform duration-300 hover:scale-105">
               {/* Outer Dashed Ring */}
               <div className="absolute inset-0 rounded-full border-[6px] border-dashed border-[#dcf0ec] pointer-events-none scale-110"></div>
               
@@ -293,7 +293,7 @@ export default function Home() {
             </div>
 
             {/* Stat 2: Student Welfare */}
-            <div className="relative group mx-auto w-64 h-64 flex items-center justify-center -mt-6 rounded-full bg-[#D7F2F1] transition-transform duration-300 hover:scale-105">
+            <div className="relative group mx-auto w-64 h-64 flex items-center justify-center mt-0 md:-mt-6 rounded-full bg-[#D7F2F1] transition-transform duration-300 hover:scale-105">
               {/* Outer Dashed Ring */}
               <div className="absolute inset-0 rounded-full border-[6px] border-dashed border-[#dcf0ec] pointer-events-none scale-110"></div>
               
@@ -307,7 +307,7 @@ export default function Home() {
             </div>
 
             {/* Stat 3: Ops & Admin */}
-            <div className="relative group mx-auto w-64 h-64 flex items-center justify-center -mt-6 rounded-full bg-[#D7F2F1] transition-transform duration-300 hover:scale-105">
+            <div className="relative group mx-auto w-64 h-64 flex items-center justify-center mt-0 md:-mt-6 rounded-full bg-[#D7F2F1] transition-transform duration-300 hover:scale-105">
               {/* Outer Dashed Ring */}
               <div className="absolute inset-0 rounded-full border-[6px] border-dashed border-[#dcf0ec] pointer-events-none scale-110"></div>
               
@@ -524,7 +524,7 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="flex flex-wrap md:flex-nowrap gap-16 lg:gap-24">
+          <div className="flex flex-col sm:flex-row gap-16 lg:gap-24">
             <div>
               <h4 className="font-bold text-brand-dark text-[15px] mb-6">Explore</h4>
               <ul className="space-y-4 text-[13px] font-medium text-[#6b9c97]">

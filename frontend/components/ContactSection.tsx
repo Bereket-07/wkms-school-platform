@@ -110,8 +110,7 @@ export default function ContactSection({ content = {} }: { content?: Record<stri
                             </div>
 
                             <div className="space-y-3">
-                                {/* The design mockup strangely shows "Subject (Optional)" for the message box label too */}
-                                <label htmlFor="message" className="text-sm font-bold text-black block">Subject (Optional)</label>
+                                <label htmlFor="message" className="text-sm font-bold text-black block">Message</label>
                                 <textarea
                                     id="message"
                                     {...register("message", { required: "Message is required" })}
