@@ -63,3 +63,21 @@ def update_contact_message(
     db.commit()
     db.refresh(message)
     return message
+
+@router.delete("/{id}")
+def delete_contact_message(
+    *,
+    db: Session = Depends(deps.get_db),
+    id: str,
+    # current_user = Depends(deps.get_current_active_superuser),
+) -> Any:
+    """
+    Delete a contact message.
+    """
+    message = db.query(ContactMessage).filter(ContactMessage.id == id).first()
+    if not message:
+        raise HTTPException(status_code=404, detail="Message not found")
+    
+    db.delete(message)
+    db.commit()
+    return {"status": "success", "message": "Message deleted successfully"}

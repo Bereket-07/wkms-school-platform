@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getContactMessages, ContactMessage } from "@/lib/api";
-import { Mail, Clock, Search, Filter, CheckCircle2, AlertCircle } from "lucide-react";
+import { getContactMessages, updateContactMessage, deleteContactMessage, ContactMessage } from "@/lib/api";
+import { Mail, Clock, Search, Trash2, Eye, EyeOff } from "lucide-react";
 import { format } from "date-fns";
 
 export default function AdminMessagesPage() {
     const [messages, setMessages] = useState<ContactMessage[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");
+    const [filter, setFilter] = useState<'all' | 'unread' | 'read'>('all');
 
     useEffect(() => {
         async function fetchMessages() {
@@ -24,12 +25,37 @@ export default function AdminMessagesPage() {
         fetchMessages();
     }, []);
 
-    const filteredMessages = messages.filter(msg =>
-        msg.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        msg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        msg.subject?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        msg.message.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const toggleRead = async (id: string, currentStatus: boolean) => {
+        try {
+            await updateContactMessage(id, !currentStatus);
+            setMessages(prev => prev.map(msg => msg.id === id ? { ...msg, is_read: !currentStatus } : msg));
+        } catch (error) {
+            console.error("Failed to update read status", error);
+        }
+    };
+
+    const handleDelete = async (id: string) => {
+        if (!confirm("Are you sure you want to delete this message?")) return;
+        try {
+            await deleteContactMessage(id);
+            setMessages(prev => prev.filter(msg => msg.id !== id));
+        } catch (error) {
+            console.error("Failed to delete message", error);
+        }
+    };
+
+    const filteredMessages = messages
+        .filter(msg => {
+            if (filter === 'unread') return !msg.is_read;
+            if (filter === 'read') return msg.is_read;
+            return true;
+        })
+        .filter(msg =>
+            msg.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            msg.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            msg.subject?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            msg.message.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
     return (
         <div className="space-y-6">
@@ -51,6 +77,30 @@ export default function AdminMessagesPage() {
                 </div>
             </div>
 
+            {/* Filter Tabs */}
+            <div className="flex gap-2 border-b border-slate-100 pb-px">
+                {(['all', 'unread', 'read'] as const).map((t) => {
+                    const count = messages.filter(m => {
+                        if (t === 'unread') return !m.is_read;
+                        if (t === 'read') return m.is_read;
+                        return true;
+                    }).length;
+                    return (
+                        <button
+                            key={t}
+                            onClick={() => setFilter(t)}
+                            className={`px-4 py-2 text-sm font-semibold border-b-2 capitalize transition-colors ${
+                                filter === t 
+                                    ? 'border-emerald-500 text-emerald-600' 
+                                    : 'border-transparent text-slate-500 hover:text-slate-800'
+                            }`}
+                        >
+                            {t} ({count})
+                        </button>
+                    );
+                })}
+            </div>
+
             {loading ? (
                 <div className="flex justify-center py-20">
                     <div className="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
@@ -61,11 +111,18 @@ export default function AdminMessagesPage() {
                         <div key={msg.id} className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex justify-between items-start mb-4">
                                 <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 font-bold text-lg">
-                                        {msg.name.charAt(0).toUpperCase()}
+                                    <div className="relative">
+                                        <div className="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 font-bold text-lg">
+                                            {msg.name.charAt(0).toUpperCase()}
+                                        </div>
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-slate-900">{msg.name}</h3>
+                                        <div className="flex items-center gap-2">
+                                            <h3 className="font-bold text-slate-900">{msg.name}</h3>
+                                            {!msg.is_read && (
+                                                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" title="New Message"></span>
+                                            )}
+                                        </div>
                                         <a href={`mailto:${msg.email}`} className="text-sm text-slate-500 hover:text-emerald-600 flex items-center gap-1">
                                             <Mail className="w-3 h-3" /> {msg.email}
                                         </a>
@@ -87,13 +144,31 @@ export default function AdminMessagesPage() {
                                 {msg.message}
                             </div>
 
-                            <div className="mt-4 flex gap-3 justify-end">
-                                <a
-                                    href={`mailto:${msg.email}?subject=Re: ${msg.subject || 'Your Inquiry'}`}
-                                    className="text-sm font-medium text-slate-600 hover:text-emerald-600 px-3 py-1.5 rounded-lg hover:bg-emerald-50 transition-colors border border-slate-200"
+                            <div className="mt-4 pt-4 border-t border-slate-100 flex gap-3 justify-end items-center">
+                                <button
+                                    onClick={() => toggleRead(msg.id!, !!msg.is_read)}
+                                    className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors border ${
+                                        msg.is_read 
+                                            ? 'text-slate-500 hover:text-slate-700 bg-white border-slate-200 hover:bg-slate-50' 
+                                            : 'text-emerald-700 hover:text-emerald-800 bg-emerald-50 border-emerald-200 hover:bg-emerald-100'
+                                    }`}
                                 >
-                                    Reply via Email
-                                </a>
+                                    {msg.is_read ? (
+                                        <>
+                                            <EyeOff className="w-3.5 h-3.5" /> Mark as Unread
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Eye className="w-3.5 h-3.5" /> Mark as Read
+                                        </>
+                                    )}
+                                </button>
+                                <button
+                                    onClick={() => handleDelete(msg.id!)}
+                                    className="flex items-center gap-1.5 text-xs font-semibold text-rose-600 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 px-3 py-1.5 rounded-lg transition-colors"
+                                >
+                                    <Trash2 className="w-3.5 h-3.5" /> Delete
+                                </button>
                             </div>
                         </div>
                     ))}

@@ -245,4 +245,14 @@ export const getContactMessages = async (skip = 0, limit = 100): Promise<Contact
     return response.data;
 };
 
+export const updateContactMessage = async (id: string, isRead: boolean): Promise<ContactMessage> => {
+    const response = await api.put(`/contact/${id}`, { is_read: isRead });
+    return response.data;
+};
+
+export const deleteContactMessage = async (id: string): Promise<{ status: string; message: string }> => {
+    const response = await api.delete(`/contact/${id}`);
+    return response.data;
+};
+
 export default api;
