@@ -520,7 +520,7 @@ export default function Home() {
               />
             </div>
             <p className="text-[#6b9c97] text-[13px] font-medium max-w-[250px] leading-relaxed">
-              {_t('footer_desc', 'Wakero Keleboro Memorial Primary and Middle School. Empowering rural communities in Ethiopia through quality education.')}
+              {_t('footer_desc', 'Wakero Kelboro Memorial Primary and Middle School. Empowering rural communities in Ethiopia through quality education.')}
             </p>
           </div>
           

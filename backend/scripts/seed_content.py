@@ -35,7 +35,7 @@ defaults = [
     {"section": "ABOUT", "key": "about_badge", "content": "Who We Are", "label": "Section Badge"},
     {"section": "ABOUT", "key": "about_title_1", "content": "More Than Just", "label": "Title Line 1"},
     {"section": "ABOUT", "key": "about_title_accent", "content": "A School.", "label": "Title Accent"},
-    {"section": "ABOUT", "key": "about_text_1", "content": "Wakero Keleboro Memorial Primary and Middle School (WKMS) was founded to honor the legacy of Wakero Keleboro, a visionary who believed in the transformative power of education.", "label": "Paragraph 1"},
+    {"section": "ABOUT", "key": "about_text_1", "content": "Wakero Kelboro Memorial Primary and Middle School (WKMS) was founded to honor the legacy of Wakero Kelboro, a visionary who believed in the transformative power of education.", "label": "Paragraph 1"},
     {"section": "ABOUT", "key": "about_text_2", "content": "We provide high-quality early childhood education, nutrition, and holistic care to children in rural Ethiopia, ensuring they have the foundation needed to succeed in life.", "label": "Paragraph 2"},
     {"section": "ABOUT", "key": "about_image_main", "content": "/assets/5776370369471122231.jpg", "content_type": "IMAGE", "label": "Main Image"},
     {"section": "ABOUT", "key": "about_image_accent", "content": "/assets/5776370369471122228.jpg", "content_type": "IMAGE", "label": "Floating Accent Image"},
@@ -52,7 +52,7 @@ defaults = [
     {"section": "IMPACT", "key": "impact_stat_3_label", "content": "Community Projects", "label": "Stat 3 Label"},
 
     # FOOTER
-    {"section": "FOOTER", "key": "footer_desc", "content": "Wakero Keleboro Memorial Primary and Middle School. Empowering rural communities through education.", "label": "Footer Description"},
+    {"section": "FOOTER", "key": "footer_desc", "content": "Wakero Kelboro Memorial Primary and Middle School. Empowering rural communities through education.", "label": "Footer Description"},
 
     # COMMUNITY SECTION
     # COMMUNITY SECTION

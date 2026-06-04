@@ -37,14 +37,14 @@ const montserratAlt = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://wakerokelborofoundation.org"),
   title: {
-    default: "WKMS - Wakero Keleboro Memorial Primary and Middle School",
-    template: "%s | Wakero Keleboro Foundation",
+    default: "WKMS - Wakero Kelboro Memorial Primary and Middle School",
+    template: "%s | Wakero Kelboro Foundation",
   },
-  description: "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
-  keywords: ["Education in Ethiopia", "Wakero Keleboro Memorial Primary and Middle School", "Rural School Ethiopia", "Charity for Education", "NGO Ethiopia", "Support Ethiopian Students", "Build Schools in Africa"],
-  authors: [{ name: "Wakero Keleboro Foundation" }],
-  creator: "Wakero Keleboro Foundation",
-  publisher: "Wakero Keleboro Foundation",
+  description: "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Kelboro.",
+  keywords: ["Education in Ethiopia", "Wakero Kelboro Memorial Primary and Middle School", "Rural School Ethiopia", "Charity for Education", "NGO Ethiopia", "Support Ethiopian Students", "Build Schools in Africa"],
+  authors: [{ name: "Wakero Kelboro Foundation" }],
+  creator: "Wakero Kelboro Foundation",
+  publisher: "Wakero Kelboro Foundation",
   icons: {
     icon: '/wkmslogo.svg',
     shortcut: '/wkmslogo.png',
@@ -56,10 +56,10 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    title: "WKMS - Wakero Keleboro Memorial Primary and Middle School",
-    description: "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
+    title: "WKMS - Wakero Kelboro Memorial Primary and Middle School",
+    description: "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Kelboro.",
     url: "https://wakerokelborofoundation.org",
-    siteName: "Wakero Keleboro Foundation",
+    siteName: "Wakero Kelboro Foundation",
     locale: "en_US",
     type: "website",
     images: [
@@ -67,13 +67,13 @@ export const metadata: Metadata = {
         url: "/opengraph-image.png",
         width: 1200,
         height: 630,
-        alt: "Wakero Keleboro Memorial Primary and Middle School Students",
+        alt: "Wakero Kelboro Memorial Primary and Middle School Students",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "WKMS - Wakero Keleboro Memorial Primary and Middle School",
+    title: "WKMS - Wakero Kelboro Memorial Primary and Middle School",
     description: "Connecting Education, Opportunity & Impact in rural Ethiopia.",
     creator: "@wkmspre_school", // Replace with actual handle if applicable
     images: ["/opengraph-image.png"],
@@ -111,7 +111,7 @@ export default function RootLayout({
                   "@type": "WebSite",
                   "@id": "https://wakerokelborofoundation.org/#website",
                   "url": "https://wakerokelborofoundation.org/",
-                  "name": "Wakero Keleboro Foundation",
+                  "name": "Wakero Kelboro Foundation",
                   "description": "Connecting Education, Opportunity & Impact in rural Ethiopia.",
                   "publisher": {
                     "@id": "https://wakerokelborofoundation.org/#organization"
@@ -120,14 +120,14 @@ export default function RootLayout({
                 {
                   "@type": ["NGO", "Organization"],
                   "@id": "https://wakerokelborofoundation.org/#organization",
-                  "name": "Wakero Keleboro Foundation",
+                  "name": "Wakero Kelboro Foundation",
                   "url": "https://wakerokelborofoundation.org/",
                   "logo": {
                     "@type": "ImageObject",
                     "url": "https://wakerokelborofoundation.org/wkmslogo.png"
                   },
                   "image": "https://wakerokelborofoundation.org/opengraph-image.png",
-                  "description": "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Keleboro.",
+                  "description": "Connecting Education, Opportunity & Impact in rural Ethiopia. Join us in building a future for the children of Wakero Kelboro.",
                   "areaServed": {
                     "@type": "Country",
                     "name": "Ethiopia"
